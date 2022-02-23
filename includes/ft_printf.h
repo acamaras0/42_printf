@@ -44,7 +44,6 @@ static const t_dispach g_dispach[11] = {
     NULL;
     ifpercent;
 };
-
 int		ft_printf(const char *format, ...);
 
 #endif
