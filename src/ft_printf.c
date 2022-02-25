@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
 
 void ifpercent(t_struct *s)
 {
@@ -163,27 +164,28 @@ int     parse(const char *format, t_struct *s, va_list args, int i)
     return(i - 1);
 }
 
-int     formato(const char *format, t_struct *s, va_list args, int i)
+int     formato(const char *format, t_struct *s, va_list args, int pos)
 {
-    while(format[i] != '\0')
+    while(format[pos] != '\0')
     {
-        if(format[i] != '%')
-            s->print += write(1, &format[i], 1);
-        while (format[i])
+        if(format[pos] != '%')
+            s->print += write(1, &format[pos], 1);
+        else if(format[pos] == '%')
         {
-             if (format[i] == '%')
+            while (format[pos])
             {
-                i++;
-                if(ft_strchr(CONVERSION, format[i]))
+                pos++;
+                if(ft_strchr(CONVERSION, format[pos]))
                 {
-                    i = parse(format, s, args, i) + 2;
+                    pos = parse(format, s, args, pos) + 2;
                     break;
                 }
+                else
+                pos = parse(format, s, args, pos);
             }
-            else
-                i = parse(format, s, args, i);
+            continue;
         }
-        i++;
+        pos++;
     }
     return(s->print);
 }

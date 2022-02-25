@@ -34,7 +34,7 @@ static char	*helper( char *str, int i, long long nb)
 	return (str);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(unsigned long long n)
 {
 	char	*str;
 	int		i;
