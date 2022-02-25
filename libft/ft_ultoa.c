@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_ultoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acamaras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 15:50:41 by acamaras          #+#    #+#             */
-/*   Updated: 2021/11/18 14:44:21 by acamaras         ###   ########.fr       */
+/*   Created: 2022/02/25 12:57:13 by acamaras          #+#    #+#             */
+/*   Updated: 2022/02/25 12:57:18 by acamaras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*helper( char *str, int i, long long nb)
 	return (str);
 }
 
-char	*ft_itoa(int n)
+char	*ft_ultoa(unsigned long long n)
 {
 	char	*str;
 	int		i;

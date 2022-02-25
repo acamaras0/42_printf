@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
 void ifpercent(t_struct *s)
 {
@@ -35,7 +35,7 @@ void     ifstring(t_struct *s, va_list args)
     if (str == NULL)
     {
         ft_putstr("(null)");
-        return (0);
+        return;
     }
     else
         ft_putstr(str);
@@ -49,7 +49,7 @@ void     ifnum(t_struct *s, va_list args)
 
     i = 0;
     str = ft_itoa(va_arg(args, int));
-    s->printed += ft_strlen(str);
+    s->print += ft_strlen(str);
     ft_strdel(&str);
 }
 
@@ -64,6 +64,7 @@ void     ifpointer(t_struct *s, va_list args)
     if (str[0] == '0')
         return;
     else
+    {
         while (str[i++])
         {
             if (str[i] >= 65 && str[i] <= 90)
@@ -73,58 +74,61 @@ void     ifpointer(t_struct *s, va_list args)
     joined = ft_strjoin("0x", str);
     ft_putstr(joined);
     s->print += ft_strlen(joined);
-    free(str);
-    free(joined);
+    ft_strdel(&str);
+    ft_strdel(&joined);
 }
 
-int     ifunsigned(unsigned long i)
+void     ifunsigned(t_struct *s, va_list args)
 {
-    unsigned int length;
+    unsigned long i;
     char *str;
 
-    length = 0;
-    if (i == 0)
-        length += write(1, "0", 1);
-    else
-    {
-        str = ft_uitoa(i);
-        length += ifstring(str);
-        free(str);
-    }   
-    return (length);
+    i = va_arg(args, unsigned long);
+    str = ft_ultoa(i);
+    ft_putstr(str);
+    s->print += ft_strlen(str);
+    ft_strdel(&str);
 }
 
-int     ifhex(unsigned long i, const char format)
+void     ifhex(t_struct *s, va_list args)
 {
     char *str;
+    unsigned long i;
+
+    i = va_arg(args, unsigned long);
+    str = ft_itoa_base(i, 16);
+    s->print += ft_strlen(str);
+    ft_strdel(&str);
+}
+
+void     ifhex2(t_struct *s, va_list args)
+{
+    char *str;
+    unsigned long i;
     int j;
 
     j = 0;
-    if (i == 0)
-        return(write(1, "0", 1));
-    else 
-        str = ft_itoa_base(i, 16);
-    if (format == 'x')
-        while (str[j++])
-        {
-            if (str[j] >= 65 && str[j] <= 90)
-                str[j] += 32;
-        }
-    return (ifstring(str));
+    i = va_arg(args, unsigned long);
+    str = ft_itoa_base(i, 16);
+    while (str[j++])
+    {
+        if (str[j] >= 65 && str[j] <= 90)
+            str[j] += 32;
+    }
+    s->print += ft_strlen(str);
+    ft_strdel(&str);
 }
 
-int     ifoctal(unsigned long i)
+void     ifoctal(t_struct *s, va_list args)
 {
-    unsigned long length;
+    unsigned long i;
     char *str;
 
-    length = 0;
-    str = NULL;
-    if (i == 0)
-        length += write(1, "0", 1);
-    else
-        str = ft_itoa_base(i, 8);
-    return (ifstring(str));
+    i = va_arg(args, unsigned long);
+    str = ft_itoa_base(i, 8);
+    s->print += ft_strlen(str);
+    ft_putstr(str);
+    ft_strdel(&str);
 }
 
 void     get_formats(t_struct *s, char c, va_list args)
@@ -136,28 +140,30 @@ void     get_formats(t_struct *s, char c, va_list args)
     else if (c == 's')
         ifstring(s, args);
     else if (c == '%')
-        ifpercent(s, args);
+        ifpercent(s);
     else if (c == 'p')
-        ifpointer(s, args));
+        ifpointer(s, args);
     else if (c == 'u')
-        ifunsigned(s, args));
-    else if (c == 'X' || c == 'x')
+        ifunsigned(s, args);
+    else if (c == 'X')
         ifhex(s, args);
+    else if (c == 'x')
+        ifhex2(s, args);
     else if (c == 'o')
-        ifoctal(s, args));
+        ifoctal(s, args);
 }
 
-int     parse(t_struct *s, const char *format, va_list args, int i)
+int     parse(const char *format, t_struct *s, va_list args, int i)
 {
-    f->pos = i;
-    get_format(s, format[i], args);
-    i = f->pos;
+    s->pos = i;
+    get_formats(s, format[i], args);
+    i = s->pos;
     if (format[i] == '\0')
         return(i);
-    return(i -1);
+    return(i - 1);
 }
 
-int     format(const char *format, t_struct *s, va_list args, int i)
+int     formato(const char *format, t_struct *s, va_list args, int i)
 {
     while(format[i] != '\0')
     {
@@ -170,12 +176,12 @@ int     format(const char *format, t_struct *s, va_list args, int i)
                 i++;
                 if(ft_strchr(CONVERSION, format[i]))
                 {
-                    i = parse(s, i, format, args) + 2;
+                    i = parse(format, s, args, i) + 2;
                     break;
                 }
             }
             else
-                i = parse(s, i, format, args);
+                i = parse(format, s, args, i);
         }
         i++;
     }
@@ -197,11 +203,11 @@ int		ft_printf(const char *format, ...)
     s->form = (char *)format;
     va_start(args, format);
     length = ft_strlen(format);
-    if (length = 0)
+    if (length == 0)
             return(0);
     if (length == 1 && format[0] == '%')
         return(0);
-    i = format(format, s, args, 0);
+    i = formato(format, s, args, 0);
     va_end(args);
     free(s);
     return (i);

@@ -72,7 +72,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len);
 int		ft_strnequ(char const *s1, char const *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_strsplit(char const *s, char c);
-char	*ft_itoa(int n);
+char	*ft_itoa(unsigned long long n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char const *s, int fd);
 void	ft_putendl_fd(char const *s, int fd);
@@ -86,9 +86,10 @@ t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int		ft_abs(int n);
 int		ft_count_words(char const *s, char c);
 int		ft_iswhitespace(int c);
-int		ft_nb_len(long nb);
+int		ft_nb_len(long long nb);
 int		ft_power(int p, int base);
 char	*ft_uitoa(unsigned long long n);
 char	*ft_itoa_base(unsigned long long n, int base);
+char	*ft_ultoa(unsigned long long n);
 
 #endif

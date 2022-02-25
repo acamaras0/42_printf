@@ -23,26 +23,35 @@
 typedef struct s_struct
 {
     va_list arg;
-    char *form;
+    const char *form;
     int print;
     int pos;
 }   t_struct;
 
 
-typedef int     (*t_dispach)();
+void     ifpercent(t_struct *s);
+void     ifchar(t_struct *s, va_list args);
+void     ifstring(t_struct *s, va_list args);
+void     ifnum(t_struct *s, va_list args);
+void     ifpointer(t_struct *s, va_list args);
+void     ifunsigned(t_struct *s, va_list args);
+void     ifhex(t_struct *s, va_list args);
+void     ifhex2(t_struct *s, va_list args);
+void     ifoctal(t_struct *s, va_list args);
+
+typedef void     (*t_dispach)(t_struct *s, va_list args);
 
 static const t_dispach g_dispach[11] = {
-    ifchar;
-    ifstring;
-    ifpointer;
-    ifnum;
-    ifnum;
-    ifoctal;
-    ifunsigned;
-    ifhex;
-    ifhex;
-    NULL;
-    ifpercent;
+    ifchar,
+    ifstring,
+    ifpointer,
+    ifnum,
+    ifnum,
+    ifoctal,
+    ifunsigned,
+    ifhex2,
+    ifhex,
+    NULL,
 };
 int		ft_printf(const char *format, ...);
 

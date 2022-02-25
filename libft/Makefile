@@ -20,7 +20,8 @@ SOURCE = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.
 		ft_strsub.c ft_strjoin.c ft_strtrim.c ft_strsplit.c ft_itoa.c ft_putchar.c ft_putstr.c \
 		ft_putendl.c ft_putnbr.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
 		ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
-		ft_iswhitespace.c ft_nb_len.c ft_power.c ft_abs.c ft_count_words.c ft_uitoa.c ft_itoa_base.c
+		ft_iswhitespace.c ft_nb_len.c ft_power.c ft_abs.c ft_count_words.c ft_uitoa.c ft_itoa_base.c\
+		ft_ultoa.c
 OBJECT = $(SOURCE:.c=.o)
 HEADER = includes
 
