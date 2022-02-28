@@ -65,15 +65,10 @@ void     ifpointer(t_struct *s, va_list args)
     j = 0;
     i = va_arg(args, unsigned long long);
     str = ft_itoa_base((unsigned long long)i, 16);
-    if (str[0] == '0')
-        return;
-    else
+    while (str[j++])
     {
-        while (str[j++])
-        {
-            if (str[j] >= 65 && str[j] <= 90)
-                str[j] += 32;
-        }
+        if (str[j] >= 65 && str[j] <= 90)
+            str[j] += 32;
     }
     joined = ft_strjoin("0x", str);
     ft_putstr(joined);
