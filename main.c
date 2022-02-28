@@ -35,6 +35,8 @@ int     main()
     ft_printf("******************************\n");
     ft_printf("This is a pointer  : %p\n", p);
     printf("This is a pointer* : %p\n", p);
+    ft_printf("This is a pointer  : %p\n", NULL);
+    printf("This is a pointer* : %p\n", NULL);
     ft_printf("******************************\n");
     ft_printf("This is an u int   : %u\n", j);
     printf("This is an u int*  : %u\n", j); 
