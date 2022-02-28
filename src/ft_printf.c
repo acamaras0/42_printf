@@ -49,7 +49,8 @@ void     ifnum(t_struct *s, va_list args)
     char    *str;
 
     i = 0;
-    str = ft_itoa(va_arg(args, int));
+    str = ft_itoa(va_arg(args, intmax_t));
+    ft_putstr(str);
     s->print += ft_strlen(str);
     ft_strdel(&str);
 }
@@ -98,6 +99,7 @@ void     ifhex(t_struct *s, va_list args)
 
     i = va_arg(args, unsigned long);
     str = ft_itoa_base(i, 16);
+    ft_putstr(str);
     s->print += ft_strlen(str);
     ft_strdel(&str);
 }
@@ -116,6 +118,7 @@ void     ifhex2(t_struct *s, va_list args)
         if (str[j] >= 65 && str[j] <= 90)
             str[j] += 32;
     }
+    ft_putstr(str);
     s->print += ft_strlen(str);
     ft_strdel(&str);
 }
@@ -146,10 +149,10 @@ void     get_formats(t_struct *s, char c, va_list args)
         ifpointer(s, args);
     else if (c == 'u')
         ifunsigned(s, args);
-    else if (c == 'X')
-        ifhex(s, args);
     else if (c == 'x')
         ifhex2(s, args);
+    else if (c == 'X')
+        ifhex(s, args);
     else if (c == 'o')
         ifoctal(s, args);
 }

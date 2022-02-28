@@ -53,6 +53,7 @@ static const t_dispach g_dispach[11] = {
     ifhex,
     NULL,
 };
+
 int		ft_printf(const char *format, ...);
 
 #endif
