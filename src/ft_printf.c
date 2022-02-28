@@ -58,19 +58,21 @@ void     ifnum(t_struct *s, va_list args)
 void     ifpointer(t_struct *s, va_list args)
 {
     unsigned long long i;
+    int j;
     char *str;
     char *joined;
 
+    j = 0;
     i = va_arg(args, unsigned long long);
     str = ft_itoa_base((unsigned long long)i, 16);
     if (str[0] == '0')
         return;
     else
     {
-        while (str[i++])
+        while (str[j++])
         {
-            if (str[i] >= 65 && str[i] <= 90)
-                str[i] += 32;
+            if (str[j] >= 65 && str[j] <= 90)
+                str[j] += 32;
         }
     }
     joined = ft_strjoin("0x", str);

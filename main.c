@@ -33,9 +33,9 @@ int     main()
     ft_printf("This is a percent  : %%\n");
     printf("This is a percent* : %%\n");
     ft_printf("******************************\n");
-    //ft_printf("This is a pointer  : %p\n", p);
-    //printf("This is a pointer* : %p\n", p);
-    //ft_printf("******************************\n");
+    ft_printf("This is a pointer  : %p\n", p);
+    printf("This is a pointer* : %p\n", p);
+    ft_printf("******************************\n");
     ft_printf("This is an u int   : %u\n", j);
     printf("This is an u int*  : %u\n", j); 
     ft_printf("******************************\n");
