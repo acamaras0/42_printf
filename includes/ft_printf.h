@@ -19,6 +19,11 @@
 # include "../libft/libft.h"
 
 # define CONVERSION "cspdiouxXf%"
+# define LENGTH "lLh"
+# define L  1
+# define LL 2
+# define H  3
+# define HH 4
 
 typedef struct s_struct
 {
@@ -26,6 +31,8 @@ typedef struct s_struct
     const char *form;
     int print;
     int pos;
+    int length;
+    int index; 
 }   t_struct;
 
 
