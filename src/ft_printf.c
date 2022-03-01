@@ -132,6 +132,31 @@ void     ifoctal(t_struct *s, va_list args)
     ft_strdel(&str);
 }
 
+//char    *length_modifiers(t_struct *s, unsigned long i)
+//{
+//
+//}
+
+void    length(t_struct *s, const char *format)
+{
+    if (format[s->index] == 'l')
+    {
+        if(format[s->index + 1] == 'l')
+            s->length = LL;
+        else
+            s->length = L;
+    }
+    if (format[s->index] == 'h')
+    {
+        if(format[s->index + 1] == 'h')
+            s->length =  HH;
+        else
+            s->length = H;
+    }
+    while(ft_strchr(LENGTH, format[s->index] && format[s->index]))
+        s->index++;
+}
+
 void     get_formats(t_struct *s, char c, va_list args)
 {
     if (c == 'c')
@@ -154,14 +179,17 @@ void     get_formats(t_struct *s, char c, va_list args)
         ifoctal(s, args);
 }
 
-int     parse(const char *format, t_struct *s, va_list args, int i)
+int     parse(const char *format, t_struct *s, va_list args, int pos)
 {
-    s->pos = i;
-    get_formats(s, format[i], args);
-    i = s->pos;
-    if (format[i] == '\0')
-        return(i);
-    return(i - 1);
+    s->index = pos;
+    if (ft_strchr(LENGTH, format[pos]))
+        length(s, format);
+    else
+        get_formats(s, format[pos], args);
+    pos = s->index;
+    if (format[pos] == '\0')
+        return(pos);
+    return(pos - 1);
 }
 
 int     formato(const char *format, t_struct *s, va_list args, int pos)
