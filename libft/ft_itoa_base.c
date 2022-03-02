@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <string.h>
 
-static unsigned int	ft_numlen(long value, unsigned int base)
+static int	ft_numlen(unsigned long long value, int base)
 {
 	int	size;
 
@@ -30,7 +30,7 @@ static unsigned int	ft_numlen(long value, unsigned int base)
 	return (size);
 }
 
-static char	*helper( char *str, char *refbase, long nb, int base)
+static char	*helper( char *str, char *refbase, unsigned long long nb, int base)
 {
 	unsigned long long	i;
 
@@ -58,14 +58,12 @@ char	*ft_itoa_base(unsigned long long n, int base)
 {
 	char					*str;
 	char					*refbase;
-	unsigned long long		i;
-	long					nb;
+	unsigned long long		len;
 
-	nb = n;
 	refbase = "0123456789ABCDEF";
-	i = ft_numlen(nb, base);
-	str = (char *)malloc(sizeof(char) * (i + 1));
+	len = ft_numlen(n, base);
+	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str || base < 2 || base > 16)
 		return (NULL);
-	return (helper(str, refbase, nb, base));
-}
+	return (helper(str, refbase, n, base));
+} 

@@ -90,6 +90,6 @@ int		ft_nb_len(long long nb);
 int		ft_power(int p, int base);
 char	*ft_uitoa(unsigned long long n);
 char	*ft_itoa_base(unsigned long long n, int base);
-char	*ft_ultoa(unsigned long long n);
+char	*ft_ulltoa(unsigned long long n);
 
 #endif
