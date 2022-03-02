@@ -28,8 +28,8 @@ int     main()
     printf("This is an integer*: %d\n", b);
     ft_printf("This is an integer : %d\n", -1);
     printf("This is an integer*: %d\n", -1);
-    //ft_printf("This is an integer : %li\n", -2147483648);
-    //printf("This is an integer*: %li\n", -2147483648);
+    ft_printf("This is an integer : %li\n", -2147483648);
+    printf("This is an integer*: %li\n", -2147483648);
     ft_printf("This is an integer : %li\n", 2147483648);
     printf("This is an integer*: %li\n", 2147483648);
     ft_printf("******************************\n");
@@ -45,7 +45,11 @@ int     main()
     printf("This is a pointer* : %p\n", NULL);
     ft_printf("******************************\n");
     ft_printf("This is an u int   : %u\n", j);
-    printf("This is an u int*  : %u\n", j); 
+    printf("This is an u int*  : %u\n", j);
+    ft_printf("This is an u int   : %u\n", 55165);
+    printf("This is an u int*  : %u\n", 55165);
+    ft_printf("This is neg u int  : %u\n", -7);
+    printf("This is neg u int* : %u\n", -7); 
     ft_printf("******************************\n");
     ft_printf("This is a hex  : %x\n", x);
     printf("This is a hex* : %x\n", x); 
