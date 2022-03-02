@@ -32,7 +32,8 @@ typedef struct s_struct
     const char *form;
     int print;
     int length;
-    int index; 
+    int index;
+    char f; 
 }   t_struct;
 
 
