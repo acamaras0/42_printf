@@ -26,8 +26,10 @@ int     main()
     ft_printf("******************************\n");
     ft_printf("This is an integer : %d\n", b);
     printf("This is an integer*: %d\n", b);
-    ft_printf("This is an integer : %li\n", -2147483648);
-    printf("This is an integer*: %li\n", -2147483648);
+    ft_printf("This is an integer : %d\n", -1);
+    printf("This is an integer*: %d\n", -1);
+    //ft_printf("This is an integer : %li\n", -2147483648);
+    //printf("This is an integer*: %li\n", -2147483648);
     ft_printf("This is an integer : %li\n", 2147483648);
     printf("This is an integer*: %li\n", 2147483648);
     ft_printf("******************************\n");
