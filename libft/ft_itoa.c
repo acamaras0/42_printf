@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <string.h>
 
-static char	*helper( char *str, int i, long long nb)
+static char	*helper( char *str, int i, long nb)
 {
 	str[i--] = '\0';
 	if (nb == 0)
@@ -34,7 +34,7 @@ static char	*helper( char *str, int i, long long nb)
 	return (str);
 }
 
-char	*ft_itoa(unsigned long long n)
+char	*ft_itoa(long n)
 {
 	char	*str;
 	int		i;

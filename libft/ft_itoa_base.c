@@ -21,7 +21,7 @@ static unsigned int	ft_numlen(long value, unsigned int base)
 	if (base != 10 && value < 0)
 		value = -value;
 	if (value < 0)
-	size ++;
+		size ++;
 	while (value / base)
 	{
 		size++;

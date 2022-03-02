@@ -72,7 +72,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len);
 int		ft_strnequ(char const *s1, char const *s2, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_strsplit(char const *s, char c);
-char	*ft_itoa(unsigned long long n);
+char	*ft_itoa(long n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char const *s, int fd);
 void	ft_putendl_fd(char const *s, int fd);
