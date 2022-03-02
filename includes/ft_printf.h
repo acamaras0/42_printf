@@ -20,6 +20,7 @@
 
 # define CONVERSION "cspdiouxXf%"
 # define LENGTH "lLh"
+# define ALL "lLhcspdiouxXf%"
 # define L  1
 # define LL 2
 # define H  3
@@ -30,7 +31,6 @@ typedef struct s_struct
     va_list arg;
     const char *form;
     int print;
-    int pos;
     int length;
     int index; 
 }   t_struct;
