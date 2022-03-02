@@ -13,19 +13,32 @@
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
-char    *length_modifiers(t_struct *s, intmax_t i, va_list args)
+char     *get_itoa(t_struct *s, unsigned long i)
+{
+    if (s->f == 'i')
+        return(ft_itoa(i));
+    else if (s->f == 'u')
+        return(ft_itoa_base(i, 10));
+    else if (s->f == 'x' || s->f == 'X')
+        return(ft_itoa_base(i, 16));
+    else if (s->f == 'o')
+        return(ft_itoa_base(i, 8));
+    return 0;
+}
+
+char    *length_modifiers(t_struct *s, unsigned long i, va_list args)
 {
     if (s->length == L)
         i = (long int)va_arg(args, long int);
     else if (s->length == LL)
-        i = (long long int)va_arg(args, long long int);
+        i = (long long int)va_arg(args, long long);
     else if (s->length == H)
         i = (short int)va_arg(args, int);
     else if (s->length == HH)
         i = (signed char)va_arg(args, int);
     else if (s->length == 0)
             i = (int)va_arg(args, int);
-    return (ft_itoa(i));
+    return (get_itoa(s, i));
 }
 
 void ifpercent(t_struct *s)
@@ -60,11 +73,10 @@ void     ifstring(t_struct *s, va_list args)
 
 void     ifnum(t_struct *s, va_list args)
 {
-    intmax_t     i;
     char    *str;
 
-    i = 0;
-    str = length_modifiers(s, i, args);
+    s->f = 'i';
+    str = length_modifiers(s, 0, args);
     ft_putstr(str);
     s->print += ft_strlen(str);
     ft_strdel(&str);
@@ -94,11 +106,10 @@ void     ifpointer(t_struct *s, va_list args)
 
 void     ifunsigned(t_struct *s, va_list args)
 {
-    unsigned long i;
     char *str;
 
-    i = va_arg(args, unsigned long);
-    str = ft_ultoa(i);
+    s->f = 'u';
+    str = length_modifiers(s, 0, args);
     ft_putstr(str);
     s->print += ft_strlen(str);
     ft_strdel(&str);
@@ -107,10 +118,9 @@ void     ifunsigned(t_struct *s, va_list args)
 void     ifhex(t_struct *s, va_list args)
 {
     char *str;
-    unsigned long i;
 
-    i = va_arg(args, unsigned long);
-    str = ft_itoa_base(i, 16);
+    s->f = 'X';
+    str = length_modifiers(s, 0, args);
     ft_putstr(str);
     s->print += ft_strlen(str);
     ft_strdel(&str);
@@ -119,12 +129,11 @@ void     ifhex(t_struct *s, va_list args)
 void     ifhex2(t_struct *s, va_list args)
 {
     char *str;
-    unsigned long i;
     int j;
 
     j = 0;
-    i = va_arg(args, unsigned long);
-    str = ft_itoa_base(i, 16);
+    s->f = 'x';
+    str = length_modifiers(s, 0, args);
     while (str[j++])
     {
         if (str[j] >= 65 && str[j] <= 90)
@@ -137,11 +146,12 @@ void     ifhex2(t_struct *s, va_list args)
 
 void     ifoctal(t_struct *s, va_list args)
 {
-    unsigned long i;
+   // unsigned long i;
     char *str;
 
-    i = va_arg(args, unsigned long);
-    str = ft_itoa_base(i, 8);
+    s->f = 'o';
+    //i = va_arg(args, unsigned long);
+    str = length_modifiers(s, 0, args);
     s->print += ft_strlen(str);
     ft_putstr(str);
     ft_strdel(&str);
@@ -150,24 +160,22 @@ void     ifoctal(t_struct *s, va_list args)
 
 void    length(t_struct *s, const char *format)
 {
-    printf("HERE\n");
     if (format[s->index] == 'l')
-    {   printf("HERE2\n");
+    {
         if(format[s->index + 1] == 'l')
             s->length = LL;
-        else if (format[s->index -1] != 'l')
+        else
             s->length = L;
     }
     if (format[s->index] == 'h')
     {
         if(format[s->index + 1] == 'h')
             s->length =  HH;
-        else if (format[s->index -1] != 'h')
+        else
             s->length = H;
     }
     while(ft_strchr(LENGTH, format[s->index] && format[s->index]))
         s->index++;
-    printf("HERE3\n");
 }
 
 void     get_formats(t_struct *s, char c, va_list args)
@@ -194,7 +202,7 @@ void     get_formats(t_struct *s, char c, va_list args)
 void zero(t_struct *s)
 {
     s->print = 0;
-    s->length = 0;;
+    s->length = 0;
 }
 
 int     parse(const char *format, t_struct *s, va_list args, int pos)
@@ -210,7 +218,7 @@ int     parse(const char *format, t_struct *s, va_list args, int pos)
     pos = s->index;
     if (format[pos] == '\0')
         return(pos);
-    return(pos - 1);
+    return(pos);
 }
 
 int     formato(const char *format, t_struct *s, va_list args, int pos)
@@ -224,25 +232,20 @@ int     formato(const char *format, t_struct *s, va_list args, int pos)
             while (format[pos] != '\0' && ft_strchr(ALL, format[pos + 1]))
             {
                 pos++;
-                printf("FUCK ME\n");
                 if(ft_strchr(CONVERSION, format[pos]))
                 {
-                    pos = parse(format, s, args, pos) + 2;
-                    printf("FUCK ME1\n");
+                    pos = parse(format, s, args, pos) + 1;
                     break;
                 }
                 else
                 {
                     pos = parse(format, s, args, pos);
-                    printf("FUCK ME2\n");
                 }
             }
-            printf("FUCK ME3\n");
             continue;
         }
         pos++;
     }
-    printf("FUCK ME4\n");
     return(s->print);
 }
 
@@ -257,6 +260,7 @@ int		ft_printf(const char *format, ...)
     s = (t_struct*)(malloc)(sizeof(t_struct));
     if (!s)
         return(0);
+    zero(s);
     s->form = (char *)format;
     va_start(args, format);
     len = ft_strlen(format);
