@@ -62,6 +62,11 @@ static const t_dispach g_dispach[11] = {
     NULL,
 };
 
+char    *length_modifiers_int(t_struct *s, unsigned long i, va_list args);
+char    *length_modifiers_uint(t_struct *s, unsigned long i, va_list args);
+char    *length_modifiers_oct(t_struct *s, unsigned long i, va_list args);
+char    *length_modifiers_hex(t_struct *s, unsigned long i, va_list args);
+
 int		ft_printf(const char *format, ...);
 
 #endif
