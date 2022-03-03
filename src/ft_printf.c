@@ -13,34 +13,6 @@
 #include "../includes/ft_printf.h"
 #include <stdio.h>
 
-char     *get_itoa(t_struct *s, unsigned long i)
-{
-    if (s->f == 'i')
-        return(ft_itoa(i));
-    else if (s->f == 'u')
-        return(ft_itoa_base(i, 10));
-    else if (s->f == 'x' || s->f == 'X')
-        return(ft_itoa_base(i, 16));
-    else if (s->f == 'o')
-        return(ft_itoa_base(i, 8));
-    return 0;
-}
-
-char    *length_modifiers(t_struct *s, unsigned long i, va_list args)
-{
-    if (s->length == L)
-        i = (long int)va_arg(args, long int);
-    else if (s->length == LL)
-        i = (long long int)va_arg(args, long long);
-    else if (s->length == H)
-        i = (short int)va_arg(args, int);
-    else if (s->length == HH)
-        i = (signed char)va_arg(args, int);
-    else if (s->length == 0)
-            i = (int)va_arg(args, int);
-    return (get_itoa(s, i));
-}
-
 void ifpercent(t_struct *s)
 {
     ft_putchar('%');
@@ -71,17 +43,6 @@ void     ifstring(t_struct *s, va_list args)
     s->print+=ft_strlen(str);
 }
 
-void     ifnum(t_struct *s, va_list args)
-{
-    char    *str;
-
-    s->f = 'i';
-    str = length_modifiers(s, 0, args);
-    ft_putstr(str);
-    s->print += ft_strlen(str);
-    ft_strdel(&str);
-}
-
 void     ifpointer(t_struct *s, va_list args)
 {
     unsigned long long i;
@@ -104,12 +65,21 @@ void     ifpointer(t_struct *s, va_list args)
     ft_strdel(&joined);
 }
 
+void     ifnum(t_struct *s, va_list args)
+{
+    char    *str;
+
+    str = length_modifiers_int(s, 0, args);
+    ft_putstr(str);
+    s->print += ft_strlen(str);
+    ft_strdel(&str);
+}
+
 void     ifunsigned(t_struct *s, va_list args)
 {
     char *str;
 
-    s->f = 'u';
-    str = length_modifiers(s, 0, args);
+    str = length_modifiers_uint(s, 0, args);
     ft_putstr(str);
     s->print += ft_strlen(str);
     ft_strdel(&str);
@@ -119,8 +89,7 @@ void     ifhex(t_struct *s, va_list args)
 {
     char *str;
 
-    s->f = 'X';
-    str = length_modifiers(s, 0, args);
+    str = length_modifiers_hex(s, 0, args);
     ft_putstr(str);
     s->print += ft_strlen(str);
     ft_strdel(&str);
@@ -132,8 +101,7 @@ void     ifhex2(t_struct *s, va_list args)
     int j;
 
     j = 0;
-    s->f = 'x';
-    str = length_modifiers(s, 0, args);
+    str = length_modifiers_hex(s, 0, args);
     while (str[j++])
     {
         if (str[j] >= 65 && str[j] <= 90)
@@ -146,12 +114,9 @@ void     ifhex2(t_struct *s, va_list args)
 
 void     ifoctal(t_struct *s, va_list args)
 {
-   // unsigned long i;
     char *str;
 
-    s->f = 'o';
-    //i = va_arg(args, unsigned long);
-    str = length_modifiers(s, 0, args);
+    str = length_modifiers_oct(s, 0, args);
     s->print += ft_strlen(str);
     ft_putstr(str);
     ft_strdel(&str);
