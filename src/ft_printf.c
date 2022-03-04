@@ -50,13 +50,14 @@ void     ifpointer(t_struct *s, va_list args)
     char *str;
     char *joined;
 
-    j = -1;
+    j = 0;
     i = va_arg(args, unsigned long long);
     str = ft_itoa_base((unsigned long long)i, 16);
-    while (str[j++])
+    while (str[j])
     {
         if (str[j] >= 65 && str[j] <= 90)
             str[j] += 32;
+        j++;
     }
     joined = ft_strjoin("0x", str);
     ft_putstr(joined);
@@ -100,12 +101,13 @@ void     ifhex2(t_struct *s, va_list args)
     char *str;
     int j;
 
-    j = -1;
+    j = 0;
     str = length_modifiers_hex(s, 0, args);
-    while (str[j++])
+    while (str[j])
     {
         if (str[j] >= 65 && str[j] <= 90)
             str[j] += 32;
+        j++;
     }
     ft_putstr(str);
     s->print += ft_strlen(str);
