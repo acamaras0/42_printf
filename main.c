@@ -58,8 +58,8 @@ int     main()
     ft_printf("______________________________\n\n");
     ft_printf("This is an ld : %ld\n", 21474836480);
     printf("This is an ld*: %ld\n", 21474836480);
-    ft_printf("This is an ld : %ld\n", -9223372036854775);
-    printf("This is an ld*: %ld\n", -9223372036854775);
+    ft_printf("This is an ld : %ld\n", -9223372036854775807);
+    printf("This is an ld*: %ld\n", -9223372036854775807);
     ft_printf("______________________________\n\n");
     ft_printf("This is an lu : %lu\n", 2147483648);
     printf("This is an lu*: %lu\n", 2147483648);
@@ -81,7 +81,64 @@ int     main()
     ft_printf("This is a lo : %lo\n", -2147483648);
     printf("This is a lo*: %lo\n", -2147483648);
 
+    /*ft_printf("This is an lli : %lli\n", 1844674407370955161);
+    printf("This is an lli*: %lli\n", 1844674407370955161);
+    ft_printf("This is an lli : %lli\n", -1844674407370955161);
+    printf("This is an lli*: %lli\n", -1844674407370955161);
+    ft_printf("______________________________\n\n");
+    ft_printf("This is an lld : %lld\n", );
+    printf("This is an lld*: %lld\n", );
+    ft_printf("This is an lld : %lld\n", );
+    printf("This is an lld*: %lld\n", );
+    ft_printf("______________________________\n\n");
+    ft_printf("This is an llu : %llu\n", );
+    printf("This is an llu*: %llu\n", );
+    ft_printf("This is an llu : %llu\n", );
+    printf("This is an llu*: %llu\n", );
+    ft_printf("______________________________\n\n");
+    ft_printf("This is a llx : %llx\n", );
+    printf("This is a llx*: %llx\n", );
+    ft_printf("This is a llx : %llx\n", );
+    printf("This is a llx*: %llx\n", );
+    ft_printf("______________________________\n\n");
+    ft_printf("This is a llX : %llX\n", );
+    printf("This is a llX*: %llX\n", );
+    ft_printf("This is a llX : %llX\n", );
+    printf("This is a llX*: %llX\n", );
+    ft_printf("______________________________\n\n");
+    ft_printf("This is a llo : %llo\n", );
+    printf("This is a llo*: %llo\n", );
+    ft_printf("This is a llo : %llo\n", );
+    printf("This is a llo*: %llo\n", );*/
 
-
+    /*ft_printf("This is an li : %hi\n", 18446744073709551615);
+    printf("This is an li*: %hi\n", 18446744073709551615);
+    ft_printf("This is an li : %hi\n", -2147483648);
+    printf("This is an li*: %hi\n", -2147483648);
+    ft_printf("______________________________\n\n");
+    ft_printf("This is an ld : %hd\n", 21474836480);
+    printf("This is an ld*: %hd\n", 21474836480);
+    ft_printf("This is an ld : %hd\n", -9223372036854775);
+    printf("This is an ld*: %hd\n", -9223372036854775);
+    ft_printf("______________________________\n\n");
+    ft_printf("This is an lu : %hu\n", 2147483648);
+    printf("This is an lu*: %hu\n", 2147483648);
+    ft_printf("This is an lu : %hu\n", -2147483648);
+    printf("This is an lu*: %hu\n", -2147483648);
+    ft_printf("______________________________\n\n");
+    ft_printf("This is a lx : %hx\n", 21474836480);
+    printf("This is a lx*: %hx\n", 21474836480);
+    ft_printf("This is a lx : %hx\n", -9223372036854775);
+    printf("This is a lx*: %hx\n", -9223372036854775);
+    ft_printf("______________________________\n\n");
+    ft_printf("This is a lX : %hX\n", 21474836480);
+    printf("This is a lX*: %hX\n", 21474836480);
+    ft_printf("This is a lX : %hX\n", -9223372036854775);
+    printf("This is a lX*: %hX\n", -9223372036854775);
+    ft_printf("______________________________\n\n");
+    ft_printf("This is a lo : %ho\n", 2147483648);
+    printf("This is a lo*: %ho\n", 2147483648);
+    ft_printf("This is a lo : %ho\n", -2147483648);
+    printf("This is a lo*: %ho\n", -2147483648);*/
     return 0;
 }
