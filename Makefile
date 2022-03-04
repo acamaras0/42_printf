@@ -1,44 +1,54 @@
-NAME		= libftprintf.a
-INCLUDE		= includes
-LIBFT		= libft
-SRC_DIR		= src/
-OBJ_DIR		= obj/
-CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -I
-RM			= rm -f
-AR			= ar rcs
+#******************************************************************************#
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: acamaras <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/19 14:24:03 by acamaras          #+#    #+#              #
+#    Updated: 2022/01/19 14:24:14 by acamaras         ###   ########.fr        #
+#                                                                              #
+#******************************************************************************#
 
-SRC_FILES	=	ft_printf len_modifiers
+NAME := libftprintf.a
+EXE := ft_printf
 
+CC := gcc
+CFLAGS := -c -Wall -Werror -Wextra
+INCLUDES := -I./libft -I./includes
 
-SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+SRC_DIR := ./src
+OBJ_DIR := ./obj
+SRCS := ./src/$(EXE).c ./src/len_modifiers.c  
+OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+HEADER := $(SRC_DIR)/$(EXE).h
 
-OBJF		=	.cache_exists
+LIB_DIR := libft
+LIBFT := $(addprefix $(LIB_DIR), libft.a)
+LIB_OBJS = $(shell find $(LIB_DIR) -type f | grep -E "\.o$$")
 
-all:		$(NAME)
+.PHONY: all clean fclean re
 
-$(NAME):	$(OBJ)
-			make -C $(LIBFT)
-			@cp libft/libft.a .
-			@mv libft.a $(NAME)
-			@$(AR) $(NAME) $(OBJ)
+all: $(NAME)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-			@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT)
+	ar rcs $@ $(OBJS) $(LIB_OBJS)
 
-$(OBJF):
-			@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR):
+	mkdir -p $(@)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $<
+
+$(LIBFT):
+	$(MAKE) -C $(LIB_DIR)
 
 clean:
-			@$(RM) -rf $(OBJ_DIR)
-			@make clean -C $(LIBFT)
+	@rm -rf $(OBJ_DIR)
+	$(MAKE) -C $(LIB_DIR) clean
 
-fclean:		clean
-			@$(RM) -f $(NAME)
-			@$(RM) -f $(LIBFT)/libft.a
-			@make clean -C $(LIBFT)
+fclean: clean
+	@rm -f $(NAME)
+	$(MAKE) -C $(LIB_DIR) fclean
 
-re:			fclean all
-
-.PHONY:		all clean fclean re 
+re: fclean all
