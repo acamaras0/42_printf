@@ -127,14 +127,14 @@ void     ifoctal(t_struct *s, va_list args)
 
 void    length(t_struct *s, const char *format)
 {
-    if (format[s->index] == 'l')
+    if(format[s->index] == 'l')
     {
         if(format[s->index + 1] == 'l')
             s->length = LL;
         else
             s->length = L;
     }
-    if (format[s->index] == 'h')
+    if(format[s->index] == 'h')
     {
         if(format[s->index + 1] == 'h')
             s->length =  HH;
