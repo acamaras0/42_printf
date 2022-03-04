@@ -17,15 +17,13 @@ static int	ft_numlen(unsigned long long value, int base)
 {
 	int	size;
 
-	size = 1;
-	if (base != 10 && value < 0)
-		value = -value;
-	if (value < 0)
+	size = 0;
+	if (value == 0)
 		size ++;
-	while (value / base)
+	while (value)
 	{
-		size++;
 		value /= base;
+		size++;
 	}
 	return (size);
 }
@@ -40,11 +38,6 @@ static char	*helper( char *str, char *refbase, unsigned long long nb, int base)
 	{
 		str[0] = '0';
 		i++;
-	}
-	if (nb < 0)
-	{
-		str[0] = '-';
-		nb = nb * (-1);
 	}
 	while (nb > 0)
 	{
