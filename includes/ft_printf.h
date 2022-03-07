@@ -73,6 +73,8 @@ char	*length_modifiers_oct(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_hex(t_struct *s, unsigned long i, va_list args);
 
 void	flags_check(const char *format, t_struct *s);
+void	length_check(t_struct *s, const char *format);
+void	specifier_check(t_struct *s, char c, va_list args);
 void	zero_struct(t_struct *s);
 
 int		ft_printf(const char *format, ...);
