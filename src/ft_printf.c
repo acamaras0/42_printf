@@ -35,48 +35,6 @@ void	ifpointer(t_struct *s, va_list args)
 	ft_strdel(&joined);
 }
 
-void	length(t_struct *s, const char *format)
-{
-	if (format[s->index] == 'l')
-	{
-		if (format[s->index + 1] == 'l')
-			s->length = LL;
-		else if (format[s->index - 1] != 'l')
-			s->length = L;
-	}
-	if (format[s->index] == 'h')
-	{
-		if (format[s->index + 1] == 'h')
-			s->length = HH;
-		else if (format[s->index - 1] != 'h')
-			s->length = H;
-	}
-	while (ft_strchr(LENGTH, format[s->index] && format[s->index]))
-		s->index++;
-}
-
-void	get_formats(t_struct *s, char c, va_list args)
-{
-	if (c == 'c')
-		ifchar(s, args);
-	else if (c == 'd' || c == 'i')
-		ifnum(s, args);
-	else if (c == 's')
-		ifstring(s, args);
-	else if (c == '%')
-		ifpercent(s);
-	else if (c == 'p')
-		ifpointer(s, args);
-	else if (c == 'u')
-		ifunsigned(s, args);
-	else if (c == 'x')
-		ifhex2(s, args);
-	else if (c == 'X')
-		ifhex(s, args);
-	else if (c == 'o')
-		ifoctal(s, args);
-}
-
 void	zero_struct(t_struct *s)
 {
 	s->print = 0;
@@ -87,10 +45,10 @@ int	parse(const char *format, t_struct *s, va_list args, int pos)
 {
 	s->index = pos;
 	if (ft_strchr(LENGTH, format[pos]))
-		length(s, format);
+		length_check(s, format);
 	else
 	{
-		get_formats(s, format[pos], args);
+		specifier_check(s, format[pos], args);
 		zero_struct(s);
 	}
 	pos = s->index;
