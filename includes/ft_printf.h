@@ -30,18 +30,17 @@
 
 typedef struct s_struct
 {
-	va_list arg;
-	const char *form;
-	int print;
-	int length;
-	int index;
-	int hash;
-	int minus;
-	int plus;
-	int zero;
-	int space;
+	va_list		arg;
+	const char	*form;
+	int			print;
+	int			length;
+	int			index;
+	int			hash;
+	int			minus;
+	int			plus;
+	int			zero;
+	int			space;
 }				t_struct;
-
 
 void	ifpercent(t_struct *s);	
 void	ifchar(t_struct *s, va_list args);
@@ -55,7 +54,7 @@ void	ifoctal(t_struct *s, va_list args);
 
 typedef void	(*t_dispach)(t_struct *s, va_list args);
 
-static const	t_dispach g_dispach[11] = {
+static const t_dispach	g_dispach[11] = {
 	ifchar,
 	ifstring,
 	ifpointer,
