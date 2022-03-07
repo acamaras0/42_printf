@@ -11,37 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <stdio.h>
-
-void	ifpercent(t_struct *s)
-{
-	ft_putchar('%');
-	s->print++;
-}
-
-void	ifchar(t_struct *s, va_list args)
-{
-	unsigned char	c;
-
-	c = (unsigned char)va_arg(args, int);
-	ft_putchar(c);
-	s->print++;
-}
-
-void	ifstring(t_struct *s, va_list args)
-{
-	char	*str;
-
-	str = va_arg(args, char *);
-	if (str == NULL)
-	{
-		ft_putstr("(null)");
-		return ;
-	}
-	else
-		ft_putstr(str);
-	s->print += ft_strlen(str);
-}
 
 void	ifpointer(t_struct *s, va_list args)
 {
@@ -64,64 +33,6 @@ void	ifpointer(t_struct *s, va_list args)
 	s->print += ft_strlen(joined);
 	ft_strdel(&str);
 	ft_strdel(&joined);
-}
-
-void	ifnum(t_struct *s, va_list args)
-{
-	char	*str;
-
-	str = length_modifiers_int(s, 0, args);
-	ft_putstr(str);
-	s->print += ft_strlen(str);
-	ft_strdel(&str);
-}
-
-void	ifunsigned(t_struct *s, va_list args)
-{
-	char	*str;
-
-	str = length_modifiers_uint(s, 0, args);
-	ft_putstr(str);
-	s->print += ft_strlen(str);
-	ft_strdel(&str);
-}
-
-void	ifhex(t_struct *s, va_list args)
-{
-	char	*str;
-
-	str = length_modifiers_hex(s, 0, args);
-	ft_putstr(str);
-	s->print += ft_strlen(str);
-	ft_strdel(&str);
-}
-
-void	ifhex2(t_struct *s, va_list args)
-{
-	char	*str;
-	int		j;
-
-	j = 0;
-	str = length_modifiers_hex(s, 0, args);
-	while (str[j])
-	{
-		if (str[j] >= 65 && str[j] <= 90)
-			str[j] += 32;
-		j++;
-	}
-	ft_putstr(str);
-	s->print += ft_strlen(str);
-	ft_strdel(&str);
-}
-
-void	ifoctal(t_struct *s, va_list args)
-{
-	char	*str;
-
-	str = length_modifiers_oct(s, 0, args);
-	s->print += ft_strlen(str);
-	ft_putstr(str);
-	ft_strdel(&str);
 }
 
 void	length(t_struct *s, const char *format)
@@ -166,7 +77,7 @@ void	get_formats(t_struct *s, char c, va_list args)
 		ifoctal(s, args);
 }
 
-void	zero(t_struct *s)
+void	zero_struct(t_struct *s)
 {
 	s->print = 0;
 	s->length = 0;
@@ -180,7 +91,7 @@ int	parse(const char *format, t_struct *s, va_list args, int pos)
 	else
 	{
 		get_formats(s, format[pos], args);
-		zero(s);
+		zero_struct(s);
 	}
 	pos = s->index;
 	if (format[pos] == '\0')
@@ -227,7 +138,7 @@ int	ft_printf(const char *format, ...)
 	s = (t_struct *)(malloc)(sizeof(t_struct));
 	if (!s)
 		return (0);
-	zero(s);
+	zero_struct(s);
 	s->form = (char *)format;
 	va_start(args, format);
 	len = ft_strlen(format);
