@@ -20,7 +20,9 @@
 
 # define CONVERSION "cspdiouxXf%"
 # define LENGTH "lLh"
+# define FLAGS "#0-+ "
 # define ALL "lLhcspdiouxXf%"
+
 # define L  1
 # define LL 2
 # define H  3
@@ -32,7 +34,12 @@ typedef struct s_struct
 	const char *form;
 	int print;
 	int length;
-	int index; 
+	int index;
+	int hash;
+	int minus;
+	int plus;
+	int zero;
+	int space;
 }				t_struct;
 
 
@@ -65,6 +72,9 @@ char	*length_modifiers_int(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_uint(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_oct(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_hex(t_struct *s, unsigned long i, va_list args);
+
+void	flags_check(const char *format, t_struct *s);
+void	zero_struct(t_struct *s);
 
 int		ft_printf(const char *format, ...);
 
