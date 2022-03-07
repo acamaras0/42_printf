@@ -36,8 +36,8 @@ static char	*helper( char *str, int i, long nb)
 
 char	*ft_itoa(long n)
 {
-	char	*str;
-	int		i;
+	char		*str;
+	int			i;
 	long long	nb;
 
 	nb = n;

@@ -20,7 +20,7 @@ static int	ft_numlen(unsigned long long value, int base)
 	size = 0;
 	if (value == 0)
 		size ++;
-	while( value)
+	while (value)
 	{
 		value /= base;
 		size++;
@@ -59,4 +59,4 @@ char	*ft_itoa_base(unsigned long long n, int base)
 	if (!str || base < 2 || base > 16)
 		return (NULL);
 	return (helper(str, refbase, n, base));
-} 
+}
