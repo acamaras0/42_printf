@@ -27,8 +27,6 @@ LIB_DIR := libft
 LIBFT := $(addprefix $(LIB_DIR), libft.a)
 LIB_OBJS = $(shell find $(LIB_DIR) -type f | grep -E "\.o$$")
 
-.PHONY: all clean fclean re
-
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT)
@@ -52,3 +50,5 @@ fclean: clean
 	$(MAKE) -C $(LIB_DIR) fclean
 
 re: fclean all
+
+.PHONY: all clean fclean re
