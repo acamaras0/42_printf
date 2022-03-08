@@ -71,7 +71,7 @@ int	formato(const char *format, t_struct *s, va_list args, int pos)
 			s->print += write(1, &format[pos], 1);
 		else if (format[pos] == '%')
 		{
-			while (format[pos] != '\0' && ft_strchr(ALL, format[pos + 1]))
+			while (ft_strchr(ALL, format[pos + 1]) && format[pos] != '\0')
 			{
 				pos++;
 				if (ft_strchr(CONVERSION, format[pos]))
@@ -80,7 +80,7 @@ int	formato(const char *format, t_struct *s, va_list args, int pos)
 					break ;
 				}
 				else
-				pos = parse(format, s, args, pos);
+					pos = parse(format, s, args, pos);
 			}
 			continue ;
 		}

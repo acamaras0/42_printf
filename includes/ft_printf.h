@@ -13,6 +13,8 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
@@ -20,8 +22,8 @@
 
 # define CONVERSION "cspdiouxXf%"
 # define LENGTH "lLh"
-# define FLAGS "#0-+ "
-# define ALL "#0-+ lLhcspdiouxXf%"
+# define FLAGS "#0-+ .*0123456789"
+# define ALL "#0-+ .*0123456789lLhcspdiouxXf%"
 
 # define L  1
 # define LL 2
@@ -31,7 +33,7 @@
 typedef struct s_struct
 {
 	va_list		arg;
-	const char	*form;
+	char		*form;
 	int			print;
 	int			length;
 	int			index;
