@@ -34,7 +34,6 @@ void	put_spaces(t_struct *s, int n)
 
 void	width_to_int(const char *format, t_struct *s, va_list args)
 {
-	printf("1\n");
 	if (format[s->index] == '*')
 	{
 		s->width = va_arg(args, int);

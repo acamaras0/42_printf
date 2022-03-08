@@ -50,8 +50,10 @@ void	zero_struct(t_struct *s)
 int	parse(const char *format, t_struct *s, va_list args, int pos)
 {
 	s->index = pos;
-	if (ft_strchr(LENGTH, format[pos]))
-		all_checks(format, s, args);
+	if (ft_strchr(FLAGS, format[pos]))
+	{
+		length_check(s, format); //fix the width, add precision
+	}
 	else
 	{
 		specifier_check(s, format[pos], args);

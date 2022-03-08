@@ -22,7 +22,7 @@
 
 # define CONVERSION "cspdiouxXf%"
 # define LENGTH "lLh"
-# define FLAGS "#0-+ .*0123456789"
+# define FLAGS "#0-+ .*0123456789lLh"
 # define ALL "#0-+ .*0123456789lLhcspdiouxXf%"
 
 # define L  1
