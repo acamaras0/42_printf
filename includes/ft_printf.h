@@ -21,7 +21,7 @@
 # define CONVERSION "cspdiouxXf%"
 # define LENGTH "lLh"
 # define FLAGS "#0-+ "
-# define ALL "lLhcspdiouxXf%"
+# define ALL "#0-+ lLhcspdiouxXf%"
 
 # define L  1
 # define LL 2
@@ -40,6 +40,7 @@ typedef struct s_struct
 	int			plus;
 	int			zero;
 	int			space;
+	int			width;
 }				t_struct;
 
 void	ifpercent(t_struct *s);	
@@ -75,7 +76,13 @@ char	*length_modifiers_hex(t_struct *s, unsigned long i, va_list args);
 void	flags_check(const char *format, t_struct *s);
 void	length_check(t_struct *s, const char *format);
 void	specifier_check(t_struct *s, char c, va_list args);
+void	width_check(const char *format, t_struct *s, va_list args);
+void	all_checks(const char *format, t_struct *s, va_list args);
 void	zero_struct(t_struct *s);
+
+void	put_zeroes(t_struct *s, int n);
+void	put_spaces(t_struct *s, int n);
+void	width_to_int(const char *format, t_struct *s, va_list args);
 
 int		ft_printf(const char *format, ...);
 
