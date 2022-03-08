@@ -20,7 +20,6 @@ void	put_zeroes(t_struct *s, int n)
 		n--;
 		s->print++;
 	}
-
 }
 
 void	put_spaces(t_struct *s, int n)
