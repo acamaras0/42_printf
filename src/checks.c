@@ -73,3 +73,19 @@ void	specifier_check(t_struct *s, char c, va_list args)
 	else if (c == 'o')
 		ifoctal(s, args);
 }
+
+void	width_check(const char *format, t_struct *s, va_list args)
+{
+	width_to_int(format, s, args);
+	if (format[s->index] <= '9' && format[s->index] >= '0')
+		s->width = ft_atoi(&format[s->index]);
+	while (format[s->index] <= '9' && format[s->index] >= '0')
+		s->index++;
+}
+
+void	all_checks(const char *format, t_struct *s, va_list args)
+{
+	flags_check(format, s);
+	width_check(format, s, args);
+	length_check(s, format);
+}

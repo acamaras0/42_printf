@@ -45,7 +45,7 @@ int	parse(const char *format, t_struct *s, va_list args, int pos)
 {
 	s->index = pos;
 	if (ft_strchr(LENGTH, format[pos]))
-		length_check(s, format);
+		all_checks(format, s, args);
 	else
 	{
 		specifier_check(s, format[pos], args);
