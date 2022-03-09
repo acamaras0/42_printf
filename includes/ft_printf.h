@@ -43,6 +43,7 @@ typedef struct s_struct
 	int			zero;
 	int			space;
 	int			width;
+	int			precision;
 }				t_struct;
 
 void	ifpercent(t_struct *s);	

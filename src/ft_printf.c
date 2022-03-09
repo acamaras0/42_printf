@@ -52,7 +52,8 @@ int	parse(const char *format, t_struct *s, va_list args, int pos)
 	s->index = pos;
 	if (ft_strchr(FLAGS, format[pos]))
 	{
-		length_check(s, format); //fix the width, add precision
+		//length_check(s, format); //fix the width, add precision
+		all_checks(format, s, args);
 	}
 	else
 	{
@@ -62,7 +63,7 @@ int	parse(const char *format, t_struct *s, va_list args, int pos)
 	pos = s->index;
 	if (format[pos] == '\0')
 		return (pos);
-	return (pos);
+	return (pos - 1);
 }
 
 int	formato(const char *format, t_struct *s, va_list args, int pos)
@@ -78,7 +79,7 @@ int	formato(const char *format, t_struct *s, va_list args, int pos)
 				pos++;
 				if (ft_strchr(CONVERSION, format[pos]))
 				{
-					pos = parse(format, s, args, pos) + 1;
+					pos = parse(format, s, args, pos) + 2;
 					break ;
 				}
 				else
