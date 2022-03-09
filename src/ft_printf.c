@@ -35,7 +35,7 @@ void	ifpointer(t_struct *s, va_list args)
 	ft_strdel(&joined);
 }
 
-void	zero_struct(t_struct *s)
+void	set_default(t_struct *s)
 {
 	s->print = 0;
 	s->length = 0;
@@ -45,6 +45,20 @@ void	zero_struct(t_struct *s)
 	s->zero = 0;
 	s->space = 0;
 	s->hash = 0;
+	s->precision = 0;
+}
+
+void	set_default1(t_struct *s)
+{
+	s->print = 0;
+	s->length = 0;
+	s->minus = 0;
+	s->plus = 0;
+	s->width = 0;
+	s->zero = 0;
+	s->space = 0;
+	s->hash = 0;
+	s->precision = 0;
 }
 
 int	parse(const char *format, t_struct *s, va_list args, int pos)
@@ -58,7 +72,7 @@ int	parse(const char *format, t_struct *s, va_list args, int pos)
 	else
 	{
 		specifier_check(s, format[pos], args);
-		zero_struct(s);
+		set_default1(s);
 	}
 	pos = s->index;
 	if (format[pos] == '\0')
@@ -103,7 +117,7 @@ int	ft_printf(const char *format, ...)
 	s = (t_struct *)(malloc)(sizeof(t_struct));
 	if (!s)
 		return (0);
-	zero_struct(s);
+	set_default(s);
 	s->form = (char *)format;
 	va_start(args, format);
 	len = ft_strlen(format);

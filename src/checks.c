@@ -102,18 +102,38 @@ void	width_check(const char *format, t_struct *s, va_list args)
 		s->index++;
 }
 
-static void		precision_check(const char *format, t_struct *s)
+static void		precision_check(const char *format, t_struct *s, va_list args, int n)
 {
-	//if (format[s->index])
+	if (format[s->index] == '.')
+	{
+		s->precision = -1;
+		s->index++;
+		if (format[s->index] >= '0' && format [s->index] <= '9')
+		{
+			s->precision = ft_atoi(&format[s->index]);
+			if (s->precision == 0)
+				s->precision = -1;
+		}
+		else if (format[s->index] == '*')
+		{
+			n = va_arg(args, int);
+			if (n >= 0)
+				s->precision = 1;
+			while(format[s->index == '*'])
+				s->index++;
+		}
+	}
+	printf("1: %d\n", s->index);
 	while (format[s->index] >= '0' && format[s->index] <= '9')
 		s->index++;
+	printf("1: %d\n", s->index);
 }
 
 void	all_checks(const char *format, t_struct *s, va_list args)
 {
 	flags_check(format, s);
 	width_check(format, s, args);
-	precision_check(format, s);
+	precision_check(format, s, args, 0);
 	//printf("index3: %d\n", s->index);
 	//printf("%d\n", s->width);
 	length_check(s, format);

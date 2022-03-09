@@ -37,9 +37,24 @@ void	ifpercent(t_struct *s)
 void	ifchar(t_struct *s, va_list args)
 {
 	unsigned char	c;
+	int				n;
 
 	c = (unsigned char)va_arg(args, int);
-	ft_putchar(c);
+	n = s->width - 1;
+	if (s->minus == 0 && s->width)
+	{
+		if (s->zero == 1)
+			put_zeroes(s, n);
+		else
+			put_spaces(s, n);
+	}
+	if (s->minus == 1 && s->width)
+	{
+		ft_putchar('%');
+		put_spaces(s, n);
+	}
+	else
+		ft_putchar(c);
 	s->print++;
 }
 

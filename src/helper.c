@@ -31,21 +31,3 @@ void	put_spaces(t_struct *s, int n)
 		s->print++;
 	}
 }
-
-/*void	width_to_int(const char *format, t_struct *s, va_list args)
-{
-	if (format[s->index] == '*')
-	{
-		s->width = va_arg(args, int);
-		if (s->width < 0)
-		{
-			s->minus = 1;
-			s->width *= -1;
-		}
-		while (format[s->index] == '*')
-		{
-			s->index++;
-		}
-	}
-}
-*/
