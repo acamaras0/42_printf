@@ -81,7 +81,6 @@ void	length_check(t_struct *s, const char *format);
 void	specifier_check(t_struct *s, char c, va_list args);
 void	width_check(const char *format, t_struct *s, va_list args);
 void	all_checks(const char *format, t_struct *s, va_list args);
-void	zero_struct(t_struct *s);
 
 void	put_zeroes(t_struct *s, int n);
 void	put_spaces(t_struct *s, int n);
