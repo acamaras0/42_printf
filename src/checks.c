@@ -48,7 +48,7 @@ void	length_check(t_struct *s, const char *format)
 		else if (format[s->index - 1] != 'h')
 			s->length = H;
 	}
-	while (ft_strchr(LENGTH, format[s->index] && format[s->index]))
+	while (ft_strchr(LENGTH, format[s->index]) && format[s->index])
 		s->index++;
 }
 
@@ -88,7 +88,7 @@ void	width_check(const char *format, t_struct *s, va_list args)
 		while (format[s->index] == '*')
 		{
 			s->index++;
-			//printf("index: %d\n", s->index);
+			//printf("width: %d\n", s->index);
 		}
 	}
 	//printf("indexxx: %d\n", s->index);
@@ -118,12 +118,12 @@ static void		precision_check(const char *format, t_struct *s, va_list args, int 
 		{
 			n = va_arg(args, int);
 			if (n >= 0)
-				s->precision = 1;
+				s->precision = n;
 			while(format[s->index] == '*')
 				s->index++;
 		}
 	}
-	//printf("1: %d\n", s->index);
+	//printf("precision: %d\n", s->index);
 	while (format[s->index] >= '0' && format[s->index] <= '9')
 		s->index++;
 	//printf("1: %d\n", s->index);
@@ -131,7 +131,7 @@ static void		precision_check(const char *format, t_struct *s, va_list args, int 
 
 void	all_checks(const char *format, t_struct *s, va_list args)
 {
-	flags_check(format, s);
+	//flags_check(format, s);
 	width_check(format, s, args);
 	precision_check(format, s, args, 0);
 	//printf("index3: %d\n", s->index);

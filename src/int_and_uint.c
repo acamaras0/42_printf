@@ -14,12 +14,12 @@
 
 void	ifnum(t_struct *s, va_list args)
 {
-	char	*str;
-	intmax_t i;
+	char		*str;
 
-	i = 0;
 	str = length_modifiers_int(s, 0, args);
+	//printf("HERE %d %d\n", s->number, s->precision);
 	s->number = s->precision - ft_strlen(str);
+	//printf("HERE2 %d %d\n", s->number, s->precision);
 	if (s->minus == 1)
 		str = align_to_left(s, str);
 	//else if (s->minus == 0)
