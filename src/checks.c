@@ -14,7 +14,7 @@
 
 void	flags_check(const char *format, t_struct *s)
 {
-	while (ft_strchr(FLAGS, format[s->index]))
+	while (ft_strchr("#0-+ ", format[s->index]))
 	{
 		if (format[s->index] == '#')
 			s->hash = 1;
@@ -131,7 +131,7 @@ static void		precision_check(const char *format, t_struct *s, va_list args, int 
 
 void	all_checks(const char *format, t_struct *s, va_list args)
 {
-	//flags_check(format, s);
+	flags_check(format, s);
 	width_check(format, s, args);
 	precision_check(format, s, args, 0);
 	//printf("index3: %d\n", s->index);
