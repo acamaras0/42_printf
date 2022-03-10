@@ -44,6 +44,8 @@ typedef struct s_struct
 	int			space;
 	int			width;
 	int			precision;
+	int			negative;
+	int 		number;
 }				t_struct;
 
 void	ifpercent(t_struct *s);	
@@ -71,7 +73,7 @@ static const t_dispach	g_dispach[11] = {
 	NULL,
 };
 
-char	*length_modifiers_int(t_struct *s, unsigned long i, va_list args);
+char	*length_modifiers_int(t_struct *s, intmax_t i, va_list args);
 char	*length_modifiers_uint(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_oct(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_hex(t_struct *s, unsigned long i, va_list args);
@@ -84,7 +86,11 @@ void	all_checks(const char *format, t_struct *s, va_list args);
 
 void	put_zeroes(t_struct *s, int n);
 void	put_spaces(t_struct *s, int n);
-void	width_to_int(const char *format, t_struct *s, va_list args);
+char	*align_to_left(t_struct *s, char *str);
+//char	*align_to_right(t_struct *s, char *str);
+
+char	*convert_left(char *str, int i, char c);
+char	*convert_right(char *str, int i, t_struct *s, char c);
 
 int		ft_printf(const char *format, ...);
 

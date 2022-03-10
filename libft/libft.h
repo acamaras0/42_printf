@@ -91,5 +91,6 @@ int		ft_power(int p, int base);
 char	*ft_uitoa(unsigned long long n);
 char	*ft_itoa_base(unsigned long long n, int base);
 char	*ft_ulltoa(unsigned long long n);
+char	*ft_strcharnew(size_t size, int c);
 
 #endif
