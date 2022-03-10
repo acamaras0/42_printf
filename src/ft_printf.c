@@ -46,6 +46,8 @@ void	set_default(t_struct *s)
 	s->space = 0;
 	s->hash = 0;
 	s->precision = 0;
+	s->negative = 0;
+	s->number = 0;
 }
 
 void	set_default1(t_struct *s)
@@ -59,6 +61,8 @@ void	set_default1(t_struct *s)
 	s->space = 0;
 	s->hash = 0;
 	s->precision = 0;
+	s->negative = 0;
+	s->number = 0;
 }
 
 int	parse(const char *format, t_struct *s, va_list args, int pos)

@@ -15,8 +15,15 @@
 void	ifnum(t_struct *s, va_list args)
 {
 	char	*str;
+	intmax_t i;
 
+	i = 0;
 	str = length_modifiers_int(s, 0, args);
+	s->number = s->precision - ft_strlen(str);
+	if (s->minus == 1)
+		str = align_to_left(s, str);
+	//else if (s->minus == 0)
+		//str = align_to_right(s, str);
 	ft_putstr(str);
 	s->print += ft_strlen(str);
 	ft_strdel(&str);

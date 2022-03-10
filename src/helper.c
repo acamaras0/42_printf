@@ -31,3 +31,22 @@ void	put_spaces(t_struct *s, int n)
 		s->print++;
 	}
 }
+
+char	*align_to_left(t_struct *s, char *str)
+{
+	int i;
+	char *joined;
+
+	joined = NULL;
+	i = s->width - ft_strlen(str);
+	if (i > 0)
+		return (joined = convert_left(str, i, ' '));
+	return(str);
+
+}
+
+/*char	*align_to_right(t_struct *s, char *str)
+{
+
+}
+*/

@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-char	*length_modifiers_int(t_struct *s, unsigned long i, va_list args)
+char	*length_modifiers_int(t_struct *s, intmax_t i, va_list args)
 {
 	if (s->length == L)
 		i = (long int)va_arg(args, long int);
@@ -24,6 +24,8 @@ char	*length_modifiers_int(t_struct *s, unsigned long i, va_list args)
 		i = (signed char)va_arg(args, int);
 	else if (s->length == 0)
 		i = (int)va_arg(args, int);
+	if (i < 0)
+		s->negative = 1;
 	return (ft_itoa(i));
 }
 
