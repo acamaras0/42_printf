@@ -19,7 +19,7 @@ INCLUDES := -I./libft -I./includes
 
 SRC_DIR := ./src
 OBJ_DIR := ./obj
-SRCS := ./src/$(EXE).c ./src/len_modifiers.c ./src/checks.c ./src/int_and_uint.c ./src/string_and_char.c ./src/hex_and_octal.c ./src/helper.c ./src/convert_and_swap.c
+SRCS := ./src/$(EXE).c ./src/len_modifiers.c ./src/checks.c ./src/int_and_uint.c ./src/string_and_char.c ./src/hex_and_octal.c ./src/helper.c ./src/convert_and_swap.c ./src/pointer.c
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER := $(SRC_DIR)/$(EXE).h
 

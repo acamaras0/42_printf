@@ -13,7 +13,6 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -45,7 +44,7 @@ typedef struct s_struct
 	int			width;
 	int			precision;
 	int			negative;
-	int 		number;
+	int			number;
 }				t_struct;
 
 void	ifpercent(t_struct *s);	
@@ -90,7 +89,7 @@ void	put_spaces(t_struct *s, int n);
 char	*align_to_left(t_struct *s, char *str);
 char	*align_to_right(t_struct *s, char *str);
 char	*convert_left(char *str, int i, char c);
-char	*convert_right(char *str, int i,  char c);
+char	*convert_right(char *str, int i, char c);
 
 int		ft_printf(const char *format, ...);
 
