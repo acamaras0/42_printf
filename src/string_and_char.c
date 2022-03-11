@@ -61,14 +61,24 @@ void	ifchar(t_struct *s, va_list args)
 void	ifstring(t_struct *s, va_list args)
 {
 	char	*str;
+	int i;
 
 	str = va_arg(args, char *);
+	i = s->width - ft_strlen(str);
 	if (str == NULL)
 	{
 		ft_putstr("(null)");
 		return ;
 	}
-	else
+	else if (s->width && !s->zero)
+	{
+		put_spaces(s, i);
 		ft_putstr(str);
+	}
+	else if (s->width && s->zero)
+	{
+		put_zeroes(s, i);
+		ft_putstr(str);
+	}
 	s->print += ft_strlen(str);
 }
