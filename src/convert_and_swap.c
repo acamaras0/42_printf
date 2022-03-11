@@ -20,10 +20,23 @@ char	*convert_left(char *str, int i, char c)
 
 	n = 0;
 	temp = ft_strcharnew(i, c);
-	joined = ft_strjoin(str, temp);
+	joined = ft_strjoin(temp, str);
 	ft_strdel(&temp);
 	ft_strdel(&str);
 	return (joined);
+}
+
+char	*align_to_left(t_struct *s, char *str)
+{
+	int i;
+	char *joined;
+
+	joined = NULL;
+	i = s->width - ft_strlen(str);
+	if (i > 0)
+		return (joined = convert_left(str, i, ' '));
+	return(str);
+
 }
 
 /*char	*convert_right(char *str, int i, t_struct *s, char c)
@@ -35,3 +48,9 @@ char	*convert_left(char *str, int i, char c)
 
 	return (joined);
 }*/
+
+/*char	*align_to_right(t_struct *s, char *str)
+{
+
+}
+*/
