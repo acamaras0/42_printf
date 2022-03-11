@@ -58,27 +58,45 @@ void	ifchar(t_struct *s, va_list args)
 	s->print++;
 }
 
+static char	*string_precision(char *str, int i)
+{
+	char	*temp;
+	int		len;
+
+	len = ft_strlen(str);
+	if (i && (i <= len))
+	{
+		temp = ft_strndup(str, i);
+		str = temp;
+		ft_strdel(&temp);
+		return (str);
+	}
+	if (i == -1)
+		str = "";
+	return (str);
+}
+
 void	ifstring(t_struct *s, va_list args)
 {
 	char	*str;
-	int i;
+	int		i;
 
 	str = va_arg(args, char *);
-	i = s->width - ft_strlen(str);
 	if (str == NULL)
-	{
-		ft_putstr("(null)");
-		return ;
-	}
-	else if (s->width && !s->zero)
+		str = "(null)";
+	str = string_precision(str, s->precision);
+	i = s->width - ft_strlen(str);
+	if (i && !s->zero)
 	{
 		put_spaces(s, i);
 		ft_putstr(str);
 	}
-	else if (s->width && s->zero)
+	else if (i && s->zero)
 	{
 		put_zeroes(s, i);
 		ft_putstr(str);
 	}
+	else if (str)
+		ft_putstr(str);
 	s->print += ft_strlen(str);
 }

@@ -52,28 +52,6 @@ void	length_check(t_struct *s, const char *format)
 		s->index++;
 }
 
-void	specifier_check(t_struct *s, char c, va_list args)
-{
-	if (c == 'c')
-		ifchar(s, args);
-	else if (c == 'd' || c == 'i')
-		ifnum(s, args);
-	else if (c == 's')
-		ifstring(s, args);
-	else if (c == '%')
-		ifpercent(s);
-	else if (c == 'p')
-		ifpointer(s, args);
-	else if (c == 'u')
-		ifunsigned(s, args);
-	else if (c == 'x')
-		ifhex2(s, args);
-	else if (c == 'X')
-		ifhex(s, args);
-	else if (c == 'o')
-		ifoctal(s, args);
-}
-
 void	width_check(const char *format, t_struct *s, va_list args)
 {
 	if (format[s->index] == '*')
@@ -95,7 +73,7 @@ void	width_check(const char *format, t_struct *s, va_list args)
 		s->index++;
 }
 
-static void		precision_check(const char *format, t_struct *s, va_list args, int n)
+void	precision_check(const char *format, t_struct *s, va_list args, int n)
 {
 	if (format[s->index] == '.')
 	{
@@ -112,7 +90,7 @@ static void		precision_check(const char *format, t_struct *s, va_list args, int 
 			n = va_arg(args, int);
 			if (n >= 0)
 				s->precision = n;
-			while(format[s->index] == '*')
+			while (format[s->index] == '*')
 				s->index++;
 		}
 	}

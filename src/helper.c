@@ -31,3 +31,25 @@ void	put_spaces(t_struct *s, int n)
 		s->print++;
 	}
 }
+
+void	specifier_check(t_struct *s, char c, va_list args)
+{
+	if (c == 'c')
+		ifchar(s, args);
+	else if (c == 'd' || c == 'i')
+		ifnum(s, args);
+	else if (c == 's')
+		ifstring(s, args);
+	else if (c == '%')
+		ifpercent(s);
+	else if (c == 'p')
+		ifpointer(s, args);
+	else if (c == 'u')
+		ifunsigned(s, args);
+	else if (c == 'x')
+		ifhex2(s, args);
+	else if (c == 'X')
+		ifhex(s, args);
+	else if (c == 'o')
+		ifoctal(s, args);
+}

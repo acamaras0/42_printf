@@ -12,45 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-void	ifpointer(t_struct *s, va_list args)
-{
-	unsigned long long	i;
-	int					j;
-	char				*str;
-	char				*joined;
-
-	j = 0;
-	i = va_arg(args, unsigned long long);
-	str = ft_itoa_base((unsigned long long)i, 16);
-	while (str[j])
-	{
-		if (str[j] >= 65 && str[j] <= 90)
-			str[j] += 32;
-		j++;
-	}
-	joined = ft_strjoin("0x", str);
-	ft_putstr(joined);
-	s->print += ft_strlen(joined);
-	ft_strdel(&str);
-	ft_strdel(&joined);
-}
-
 void	set_default(t_struct *s)
-{
-	s->print = 0;
-	s->length = 0;
-	s->minus = 0;
-	s->plus = 0;
-	s->width = 0;
-	s->zero = 0;
-	s->space = 0;
-	s->hash = 0;
-	s->precision = 0;
-	s->negative = 0;
-	s->number = 0;
-}
-
-void	set_default1(t_struct *s)
 {
 	s->print = 0;
 	s->length = 0;
@@ -70,13 +32,12 @@ int	parse(const char *format, t_struct *s, va_list args, int pos)
 	s->index = pos;
 	if (ft_strchr(FLAGS, format[pos]))
 	{
-		//length_check(s, format); //fix the width, add precision
 		all_checks(format, s, args);
 	}
 	else
 	{
 		specifier_check(s, format[pos], args);
-		set_default1(s);
+		set_default(s);
 	}
 	pos = s->index;
 	if (format[pos] == '\0')
