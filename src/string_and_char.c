@@ -50,7 +50,7 @@ void	ifchar(t_struct *s, va_list args)
 	}
 	if (s->minus == 1 && s->width)
 	{
-		ft_putchar('%');
+		ft_putchar(c);
 		put_spaces(s, n);
 	}
 	else
