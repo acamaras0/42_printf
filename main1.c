@@ -49,6 +49,9 @@
 
 int main()
 {
+    char *s = "lala";
+    void *p = s;
+
     printf ("Width trick: %*d \n", 5, 10);
     ft_printf ("Width trick: %*d \n", 5, 10);
     printf ("\nWidth trick2: %3d \n", 9);
@@ -87,7 +90,28 @@ int main()
     ft_printf ("Width uint1: %*u \n", -5, 6);
     printf ("\nWidth uint2: %05u \n", 5);
     ft_printf ("Width uint2: %05u \n", 5);
-    printf ("\nWidth uint2: %07u \n", -5);
-    ft_printf ("Width uint2: %07u \n", -5);
+    printf ("\nWidth uint3: %07u \n", -5);
+    ft_printf ("Width uint3: %07u \n", -5);
+
+    printf ("\nWidth pointer1: %*p \n", -5, p);
+    ft_printf ("Width pointer1: %*p \n", -5, p);
+    printf ("\nWidth pointer3: %20p \n", p);
+    ft_printf ("Width pointer3: %20p \n", p);
+
+    printf ("\nWidth hex1: %*x \n", 20, 42);
+    ft_printf ("Width hex1: %*x \n", 20, 42);
+    printf ("\nWidth hex1: %*X \n", 20, 42);
+    ft_printf ("Width hex1: %*X \n", 20, 42);
+    printf ("\nWidth hex2: %05x \n", -42);
+    ft_printf ("Width hex2: %05x \n", -42);
+    printf ("\nWidth hex2: %-7x \n", 0);
+    ft_printf ("Width hex2: %-7x \n", 0);
+
+    printf ("\nWidth oct1: %*o \n", 20, 42);
+    ft_printf ("Width oct1: %*o \n", 20, 42);
+    printf ("\nWidth oct2: %020o \n", -42);
+    ft_printf ("Width oct2: %020o \n", -42);
+    printf ("\nWidth oct2: %-7o \n", 0);
+    ft_printf ("Width oct2: %-7o \n", 0);
 
 }
