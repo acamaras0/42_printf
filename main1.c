@@ -69,8 +69,8 @@ int main()
 
     printf ("\n\nWidth string1: %*s \n", 5, "Ana");
     ft_printf ("Width string1: %*s \n", 5, "Ana");
-    printf ("Width string2: %5s \n", "Ana");
-    ft_printf ("Width string2: %5s \n", "Ana");
+    printf ("Width string2: %.5s \n", "AnaBanana");
+    ft_printf ("Width string2: %.5s \n", "AnaBanana");
 
     printf ("\n\nWidth string3: %5s \n", "");
     ft_printf ("Width string3: %5s \n", "");
@@ -113,5 +113,25 @@ int main()
     ft_printf ("Width oct2: %020o \n", -42);
     printf ("\nWidth oct2: %-7o \n", 0);
     ft_printf ("Width oct2: %-7o \n", 0);
+
+   printf ("\nCharacters: %c %c \n", 'a', 65);
+   ft_printf ("Characters: %c %c \n", 'a', 65);
+   printf ("\nDecimals: %d %ld\n", 1977, 650000L);
+   ft_printf ("Decimals: %d %ld\n", 1977, 650000L);
+   printf ("\nPreceding with blanks: %10d \n", 1977);
+   ft_printf ("Preceding with blanks: %10d \n", 1977);
+   printf ("\nPreceding with zeros: %010d \n", 1977);
+   ft_printf ("Preceding with zeros: %010d \n", 1977);
+   printf ("\nSome different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
+   ft_printf ("Some different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
+   //printf ("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
+   //printf ("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
+
+   printf("\n\n Test for hash x: %#x", 42);
+   ft_printf("\n Test for hash x: %#x\n", 42);
+   printf("\n Test for hash X: %#X", 42);
+   ft_printf("\n Test for hash X: %#X\n", 42);
+   printf("\n Test for hash o: %#o", 42);
+   ft_printf("\n Test for hash o: %#o\n", 42);
 
 }
