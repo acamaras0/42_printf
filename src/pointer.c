@@ -12,23 +12,35 @@
 
 #include "../includes/ft_printf.h"
 
-void	ifpointer(t_struct *s, va_list args)
+static char	*to_lower(char *str)
 {
-	unsigned long long	i;
-	int					j;
-	char				*str;
-	char				*joined;
+	int j;
 
 	j = 0;
-	i = va_arg(args, unsigned long long);
-	str = ft_itoa_base((unsigned long long)i, 16);
 	while (str[j])
 	{
 		if (str[j] >= 65 && str[j] <= 90)
 			str[j] += 32;
 		j++;
 	}
+	return (str);
+}
+
+void	ifpointer(t_struct *s, va_list args)
+{
+	unsigned long long	i;
+	int					n;
+	char				*str;
+	char				*joined;
+
+	i = va_arg(args, unsigned long long);
+	str = ft_itoa_base((unsigned long long)i, 16);
+	if (str)
+		to_lower(str);
 	joined = ft_strjoin("0x", str);
+	n = s->width - (ft_strlen(joined));
+	if (n > 0 && s->zero == 0 && s->minus == 0)
+		put_spaces(s, n);
 	ft_putstr(joined);
 	s->print += ft_strlen(joined);
 	ft_strdel(&str);
