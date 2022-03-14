@@ -64,16 +64,30 @@ int main()
     printf ("\nWidth trick4: %05d \n", 5);
     ft_printf ("Width trick4: %05d \n", 5);
 
-    printf ("\n\nWidth trick5: %*s \n", 5, "Ana");
-    ft_printf ("Width trick5: %*s \n", 5, "Ana");
-    printf ("Width trick6: %5s \n", "Ana");
-    ft_printf ("Width trick6: %5s \n", "Ana");
+    printf ("\n\nWidth string1: %*s \n", 5, "Ana");
+    ft_printf ("Width string1: %*s \n", 5, "Ana");
+    printf ("Width string2: %5s \n", "Ana");
+    ft_printf ("Width string2: %5s \n", "Ana");
 
-    printf ("\n\nWidth trick7: %5s \n", "");
-    ft_printf ("Width trick7: %5s \n", "");
-    printf ("Width trick8: %.2s \n", NULL);
-    ft_printf ("Width trick8: %.2s \n", NULL);
-    printf ("Width trick8: %s \n", "BANANA");
-    ft_printf ("Width trick8: %s \n", "BANANA");
+    printf ("\n\nWidth string3: %5s \n", "");
+    ft_printf ("Width string3: %5s \n", "");
+    printf ("Width string4: %.2s \n", NULL);
+    ft_printf ("Width string4: %.2s \n", NULL);
+    printf ("Width string5: %s \n", "BANANA");
+    ft_printf ("Width string5: %s \n", "BANANA");
+
+    printf ("\n\nWidth percent: %5% \n");
+    ft_printf ("Width percent: %5% \n");
+    printf ("\nWidth char2: %5c \n", 'a');
+    ft_printf ("Width char2: %5c \n", 'a');
+    printf ("\nWidth char3: %-7c \n", '7');
+    ft_printf ("Width char3: %-7c \n", '7');
+
+    printf ("\nWidth uint1: %*u \n", -5, 6);
+    ft_printf ("Width uint1: %*u \n", -5, 6);
+    printf ("\nWidth uint2: %05u \n", 5);
+    ft_printf ("Width uint2: %05u \n", 5);
+    printf ("\nWidth uint2: %07u \n", -5);
+    ft_printf ("Width uint2: %07u \n", -5);
 
 }
