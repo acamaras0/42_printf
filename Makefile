@@ -10,45 +10,44 @@
 #                                                                              #
 #******************************************************************************#
 
-NAME := libftprintf.a
-EXE := ft_printf
+NAME =  libftprintf.a
 
-CC := gcc
-CFLAGS := -c -Wall -Werror -Wextra
-INCLUDES := -I./libft -I./includes
+EXE = ft_printf
 
-SRC_DIR := ./src
-OBJ_DIR := ./obj
-SRCS := ./src/$(EXE).c ./src/len_modifiers.c ./src/checks.c ./src/int_and_uint.c ./src/string_and_char.c ./src/hex_and_octal.c ./src/helper.c ./src/convert_and_swap.c ./src/pointer.c
-OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-HEADER := $(SRC_DIR)/$(EXE).h
+FLAGS = -Wall -Wextra -Werror
 
-LIB_DIR := libft
-LIBFT := $(addprefix $(LIB_DIR), libft.a)
-LIB_OBJS = $(shell find $(LIB_DIR) -type f | grep -E "\.o$$")
+LIBFT_FOLDER = ./libft/
+
+LIB = ./libft/libft.a
+
+LIB_OBJ = ./libft/*.o
+
+SRCS1 = ./src/ft_printf.c ./src/checks.c ./src/convert.c ./src/helper.c \
+		./src/hex_and_octal.c ./src/int_and_uint.c ./src/len_modifiers.c ./src/pointer.c \
+		./src/pointer.c ./src/string_and_char.c
+
+OBJS = $(subst .c,.o,$(subst src/,,$(SRCS1)))
+
+INCL = -I ./includes/ -I ./libft/includes/
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT)
-	ar rcs $@ $(OBJS) $(LIB_OBJS)
-
-$(OBJ_DIR):
-	mkdir -p $(@)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $<
-
-$(LIBFT):
-	$(MAKE) -C $(LIB_DIR)
-
+$(NAME): $(SRCS1)
+	@make -s -C $(LIBFT_FOLDER)
+	@cp $(LIB) ./$(NAME)
+	@gcc $(FLAGS) $(INCLUDES) -c $(SRCS1)
+	@ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
+	
 clean:
-	@rm -rf $(OBJ_DIR)
-	$(MAKE) -C $(LIB_DIR) clean
+	@rm -f $(OBJS) $(LIB_OBJ)
+	@make -s clean -C libft
 
 fclean: clean
 	@rm -f $(NAME)
-	$(MAKE) -C $(LIB_DIR) fclean
-
+	@make -s fclean -C libft
+	
 re: fclean all
 
-.PHONY: all clean fclean re
+
+.PHONY: clean fclean re all
