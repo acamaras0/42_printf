@@ -57,6 +57,7 @@ void	width_check(const char *format, t_struct *s, va_list args)
 	if (format[s->index] == '*')
 	{
 		s->width = va_arg(args, int);
+		s->star = 1;
 		if (s->width < 0)
 		{
 			s->minus = 1;

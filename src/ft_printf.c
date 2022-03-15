@@ -25,6 +25,26 @@ void	set_default(t_struct *s)
 	s->precision = 0;
 	s->negative = 0;
 	s->number = 0;
+	s->bigx = 0;
+	s->star = 0;
+	s->index = 0;
+}
+
+void	set_default1(t_struct *s)
+{
+	s->print = 0;
+	s->length = 0;
+	s->minus = 0;
+	s->plus = 0;
+	s->width = 0;
+	s->zero = 0;
+	s->space = 0;
+	s->hash = 0;
+	s->precision = 0;
+	s->negative = 0;
+	s->number = 0;
+	s->bigx = 0;
+	s->star = 0;
 }
 
 int	parse(const char *format, t_struct *s, va_list args, int pos)
@@ -37,7 +57,7 @@ int	parse(const char *format, t_struct *s, va_list args, int pos)
 	else
 	{
 		specifier_check(s, format[pos], args);
-		set_default(s);
+		set_default1(s);
 	}
 	pos = s->index;
 	if (format[pos] == '\0')
@@ -53,6 +73,8 @@ int	formato(const char *format, t_struct *s, va_list args, int pos)
 			s->print += write(1, &format[pos], 1);
 		else if (format[pos] == '%')
 		{
+			if (!(ft_strchr(ALL, format[pos + 1]) || format[pos] == '\0'))
+				break ;
 			while (ft_strchr(ALL, format[pos + 1]) && format[pos] != '\0')
 			{
 				pos++;
@@ -93,5 +115,6 @@ int	ft_printf(const char *format, ...)
 	i = formato(format, s, args, 0);
 	va_end(args);
 	free(s);
+	//printf ("\n i = %d", i);
 	return (i);
 }
