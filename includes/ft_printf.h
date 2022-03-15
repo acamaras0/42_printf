@@ -45,6 +45,8 @@ typedef struct s_struct
 	int			precision;
 	int			negative;
 	int			number;
+	int			bigx;
+	int			star;
 }				t_struct;
 
 void	ifpercent(t_struct *s);	
