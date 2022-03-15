@@ -98,15 +98,6 @@ int main()
     printf ("\nWidth pointer3: %20p \n", p);
     ft_printf ("Width pointer3: %20p \n", p);
 
-    printf ("\nWidth hex1: %*x \n", 20, 42);
-    ft_printf ("Width hex1: %*x \n", 20, 42);
-    printf ("\nWidth hex1: %*X \n", 20, 42);
-    ft_printf ("Width hex1: %*X \n", 20, 42);
-    printf ("\nWidth hex2: %05x \n", -42);
-    ft_printf ("Width hex2: %05x \n", -42);
-    printf ("\nWidth hex2: %-7x \n", 0);
-    ft_printf ("Width hex2: %-7x \n", 0);
-
     printf ("\nWidth oct1: %*o \n", 20, 42);
     ft_printf ("Width oct1: %*o \n", 20, 42);
     printf ("\nWidth oct2: %020o \n", -42);
@@ -133,5 +124,27 @@ int main()
    ft_printf("\n Test for hash X: %#X\n", 42);
    printf("\n Test for hash o: %#o", 42);
    ft_printf("\n Test for hash o: %#o\n", 42);
+
+    printf ("\nPF Width hex2: %05x \n", 42);
+    ft_printf ("\nFT Width hex2: %05x \n", 42);
+
+    printf ("\nPFWidth hex1: %*x \n", 20, 42);
+    ft_printf ("FTWidth hex1: %*x \n", 20, 42);
+
+    printf ("\nPFWidth hex1: %*X \n", 20, 42);
+    ft_printf ("FTWidth hex1: %*X \n", 20, 42);
+
+    printf ("\nPFWidth hex3: %-7x \n", 0);
+    ft_printf ("FTWidth hex3: %-7x \n", 0);
+
+    printf("\nPF Test for hash x3: %#8x", 42);
+    ft_printf("\nFT Test for hash x3: %#8x\n",42);
+    printf("\nPF Test for hash x4: %8x", 40);
+    ft_printf("\nFT Test for hash x4: %8x\n",40);
+    printf("\nPF Test for hash x2: %x", 42);
+    ft_printf("\nFT Test for hash x2: %x\n",42);
+
+    printf("\nPF Test for hash x1: %#08x", 42);
+    ft_printf("\nFT Test for hash x1: %#08x\n",42);
 
 }
