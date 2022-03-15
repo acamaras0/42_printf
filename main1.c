@@ -137,8 +137,7 @@ int main()
     printf ("\nPFWidth hex3: %-7x \n", 0);
     ft_printf ("FTWidth hex3: %-7x \n", 0);
 
-    printf("\nPF Test for hash x3: %#8x", 42);
-    ft_printf("\nFT Test for hash x3: %#8x\n",42);
+
     printf("\nPF Test for hash x4: %8x", 40);
     ft_printf("\nFT Test for hash x4: %8x\n",40);
     printf("\nPF Test for hash x2: %x", 42);
@@ -146,5 +145,9 @@ int main()
 
     printf("\nPF Test for hash x1: %#08x", 42);
     ft_printf("\nFT Test for hash x1: %#08x\n",42);
+    printf("\nPF Test for hash X1: %#08X", 42);
+    ft_printf("\nFT Test for hash X1: %#08X\n",42);
+    printf("\nPF Test for hash x3: %#8x", 42);
+    ft_printf("\nFT Test for hash x3: %#8x\n",42);
 
 }
