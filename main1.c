@@ -150,4 +150,7 @@ int main()
     printf("\nPF Test for hash x3: %#8x", 42);
     ft_printf("\nFT Test for hash x3: %#8x\n",42);
 
+    printf("\nPF Test for hash x1: %08x", 42);
+    ft_printf("\nFT Test for hash x1: %08x\n",42);
+
 }
