@@ -36,7 +36,6 @@ static char	*swap(t_struct *s, char *str, int n)
 		str = align_to_right(s, str);
 	else if (s->minus == 0 && n > 0)
 		str = align_to_left(s, str);
-	//if ((s->hash == 1 && str[1] != 0) && s->zero == 0)
 	str = joined(s, str);
 	return (str);	
 }

@@ -15,13 +15,25 @@
 void	ifnum(t_struct *s, va_list args)
 {
 	char		*str;
+	int			i;
 
 	str = length_modifiers_int(s, 0, args);
+	i = ft_atoi(str);
 	s->number = s->precision - ft_strlen(str);
-	if (s->width && s->zero && s->minus)
+	if (s->width && s->minus)
 		str = align_to_right(s, str);
 	else if (s->width && !s->minus)
 		str = align_to_left(s, str);
+	if (s->plus == 1 && i >= 0)
+	{
+		s->print++;
+		ft_putchar('+');
+	}
+	else if (s->space == 1 && i >= 0)
+	{
+		s->print++;
+		ft_putchar(' ');
+	}
 	ft_putstr(str);
 	s->print += ft_strlen(str);
 	ft_strdel(&str);
