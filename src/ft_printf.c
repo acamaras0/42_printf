@@ -57,7 +57,7 @@ int	parse(const char *format, t_struct *s, va_list args, int pos)
 	else
 	{
 		specifier_check(s, format[pos], args);
-		set_default1(s);
+		//set_default1(s);
 	}
 	pos = s->index;
 	if (format[pos] == '\0')
@@ -115,6 +115,5 @@ int	ft_printf(const char *format, ...)
 	i = formato(format, s, args, 0);
 	va_end(args);
 	free(s);
-	//printf ("\n i = %d", i);
 	return (i);
 }
