@@ -30,6 +30,17 @@ static char 	*joined(t_struct *s, char *str)
 	return (join);
 }
 
+static char	*swap(t_struct *s, char *str, int n)
+{
+	if (s->minus == 1 && n > 0)
+		str = align_to_right(s, str);
+	else if (s->minus == 0 && n > 0)
+		str = align_to_left(s, str);
+	//if ((s->hash == 1 && str[1] != 0) && s->zero == 0)
+	str = joined(s, str);
+	return (str);	
+}
+
 void	ifhex(t_struct *s, va_list args)
 {
 	char	*str;
@@ -38,12 +49,17 @@ void	ifhex(t_struct *s, va_list args)
 	s->bigx = 1;
 	str = length_modifiers_hex(s, 0, args);
 	n = ft_strlen(str);
-	if ((s->hash == 1 && str[1] != 0) && s->zero == 0)
-		str = joined(s, str);
-	if (s->minus == 1 && n > 0)
-		str = align_to_right(s, str);
-	else if (s->minus == 0 && n > 0)
-		str = align_to_left(s, str);
+	if (s->hash == 1 && s->zero == 1)
+			str = swap(s, str, n);
+	else
+	{
+		if ((s->hash == 1 && str[1] != 0) && s->zero == 0)
+			str = joined(s, str);
+		if (s->minus == 1 && n > 0)
+			str = align_to_right(s, str);
+		else if (s->minus == 0 && n > 0)
+			str = align_to_left(s, str);
+	}
 	ft_putstr(str);
 	s->print += ft_strlen(str);
 	ft_strdel(&str);
@@ -58,12 +74,17 @@ void	ifhex2(t_struct *s, va_list args)
 	j = 0;
 	str = length_modifiers_hex(s, 0, args);
 	n = ft_strlen(str);
-	if ((s->hash == 1 && str[1] != 0))
-		str = joined(s, str);
-	if (s->minus == 1 && n > 0)
-		str = align_to_right(s, str);
-	else if (s->minus == 0 && n > 0)
-		str = align_to_left(s, str);
+	if (s->hash == 1 && s->zero == 1)
+			str = swap(s, str, n);
+	else
+	{
+		if ((s->hash == 1 && str[1] != 0) && s->zero == 0)
+			str = joined(s, str);
+		if (s->minus == 1 && n > 0)
+			str = align_to_right(s, str);
+		else if (s->minus == 0 && n > 0)
+			str = align_to_left(s, str);
+	}
 	while (str[j])
 	{
 		if (str[j] >= 65 && str[j] <= 90)
