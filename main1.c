@@ -156,8 +156,6 @@ int main()
     printf("\nPF Test for hash x2: %-8x\n", 42);
     ft_printf("\nFT Test for hash x2: %-8x\n",42);
 
-printf("\n\nNEED TO FIX\n\n");
-
     ft_printf("FT: @moulitest: %#.x %#.0x\n", 0, 0);
     printf("PF: @moulitest: %#.x %#.0x\n\n", 0, 0);
 
@@ -173,9 +171,11 @@ printf("\n\nNEED TO FIX\n\n");
     ft_printf("FT: %-#6o\n", 2500);
     printf("PF: %-#6o\n\n", 2500);
 
-     ft_printf("FT: %-10.5o\n", 2500);
+ printf("\n\nNEED TO FIX\n\n");
+
+    ft_printf("FT: %-10.5o\n", 2500);
     printf("PF: %-10.5o\n\n", 2500);
 
-     ft_printf("FT: %5d\n", -42);
+    ft_printf("FT: %5d\n", -42);
     printf("PF: %5d\n\n", -42);
 }

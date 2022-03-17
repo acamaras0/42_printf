@@ -59,6 +59,8 @@ void	ifunsigned(t_struct *s, va_list args)
 	char	*str;
 
 	str = length_modifiers_uint(s, 0, args);
+	if (str[0] == '0' && s->precision == -1)
+		str[0] = '\0';
 	s->number = s->precision - ft_strlen(str);
 	if (s->width && s->zero && s->minus)
 		str = align_to_right(s, str);
