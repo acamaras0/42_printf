@@ -28,6 +28,7 @@ void	int_helper(t_struct *s)
 	{
 		s->print++;
 		ft_putchar('-');
+		s->negative = 0;
 	}
 }
 
@@ -40,9 +41,13 @@ void	ifnum(t_struct *s, va_list args)
 	i = ft_atoi(str);
 	s->number = s->precision - ft_strlen(str);
 	if (s->width && s->minus)
+	{
 		str = align_to_right(s, str);
+	}
 	else if (s->width && !s->minus)
+	{
 		str = align_to_left(s, str);
+	}
 	int_helper(s);
 	ft_putstr(str);
 	s->print += ft_strlen(str);

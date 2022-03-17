@@ -49,7 +49,7 @@ void	ifhex(t_struct *s, va_list args)
 	str = length_modifiers_hex(s, 0, args);
 	n = ft_strlen(str);
 	if (s->hash == 1 && s->zero == 1)
-			str = swap(s, str, n);
+		str = swap(s, str, n);
 	else
 	{
 		if ((s->hash == 1 && str[1] != 0) && s->zero == 0)
@@ -67,10 +67,8 @@ void	ifhex(t_struct *s, va_list args)
 void	ifhex2(t_struct *s, va_list args)
 {
 	char	*str;
-	int		j;
 	int		n;
 
-	j = 0;
 	str = length_modifiers_hex(s, 0, args);
 	n = ft_strlen(str);
 	if (s->hash == 1 && s->zero == 1)
@@ -84,12 +82,7 @@ void	ifhex2(t_struct *s, va_list args)
 		else if (s->minus == 0 && n > 0)
 			str = align_to_left(s, str);
 	}
-	while (str[j])
-	{
-		if (str[j] >= 65 && str[j] <= 90)
-			str[j] += 32;
-		j++;
-	}
+	str = to_lower(str);
 	ft_putstr(str);
 	s->print += ft_strlen(str);
 	ft_strdel(&str);
@@ -100,6 +93,7 @@ void	ifoctal(t_struct *s, va_list args)
 	char	*str;
 	int		n;
 
+	s->octals = 1;
 	str = length_modifiers_oct(s, 0, args);
 	n = ft_strlen(str);
 	if (s->minus == 1 && n > 0)
@@ -107,7 +101,7 @@ void	ifoctal(t_struct *s, va_list args)
 	else if (s->minus == 0 && n > 0)
 		str = align_to_left(s, str);
 	if (s->hash == 1)
-		ft_putchar('0');
+		ft_putstr("0");
 	ft_putstr(str);
 	s->print += ft_strlen(str);
 	ft_strdel(&str);

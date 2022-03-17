@@ -12,20 +12,6 @@
 
 #include "../includes/ft_printf.h"
 
-static char	*to_lower(char *str)
-{
-	int j;
-
-	j = 0;
-	while (str[j])
-	{
-		if (str[j] >= 65 && str[j] <= 90)
-			str[j] += 32;
-		j++;
-	}
-	return (str);
-}
-
 void	ifpointer(t_struct *s, va_list args)
 {
 	unsigned long long	i;

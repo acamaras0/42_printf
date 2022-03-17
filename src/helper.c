@@ -53,3 +53,17 @@ void	specifier_check(t_struct *s, char c, va_list args)
 	else if (c == 'o')
 		ifoctal(s, args);
 }
+
+char	*to_lower(char *str)
+{
+	int j;
+
+	j= 0;
+	while (str[j])
+	{
+		if (str[j] >= 65 && str[j] <= 90)
+			str[j] += 32;
+		j++;
+	}
+	return (str);
+}

@@ -79,6 +79,6 @@ char	*align_to_right(t_struct *s, char *str)
 	else if (i > 0 && s->minus == 1 && s->zero == 1 && s->hash == 1)
 		return (joined = convert_right(str, i - 2, ' '));
 	else if (i > 0 && s->minus == 1 )
-		return (joined = convert_right(str, i , ' '));
+		return (joined = convert_right(str, i, ' '));
 	return (str);
 }
