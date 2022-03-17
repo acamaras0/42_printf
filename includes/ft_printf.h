@@ -47,6 +47,7 @@ typedef struct s_struct
 	int			number;
 	int			bigx;
 	int			star;
+	int			octals;
 }				t_struct;
 
 void	ifpercent(t_struct *s);	
@@ -87,6 +88,7 @@ void	all_checks(const char *format, t_struct *s, va_list args);
 
 void	put_zeroes(t_struct *s, int n);
 void	put_spaces(t_struct *s, int n);
+char	*to_lower(char *str);
 
 char	*align_to_left(t_struct *s, char *str);
 char	*align_to_right(t_struct *s, char *str);
