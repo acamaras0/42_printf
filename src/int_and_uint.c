@@ -12,6 +12,25 @@
 
 #include "../includes/ft_printf.h"
 
+void	int_helper(t_struct *s)
+{
+	if (s->plus == 1 && s->negative == 0)
+	{
+		s->print++;
+		ft_putchar('+');
+	}
+	else if (s->space == 1 && s->negative == 0)
+	{
+		s->print++;
+		ft_putchar(' ');
+	}
+	if (s->negative == 1)
+	{
+		s->print++;
+		ft_putchar('-');
+	}
+}
+
 void	ifnum(t_struct *s, va_list args)
 {
 	char		*str;
@@ -24,16 +43,7 @@ void	ifnum(t_struct *s, va_list args)
 		str = align_to_right(s, str);
 	else if (s->width && !s->minus)
 		str = align_to_left(s, str);
-	if (s->plus == 1 && i >= 0)
-	{
-		s->print++;
-		ft_putchar('+');
-	}
-	else if (s->space == 1 && i >= 0)
-	{
-		s->print++;
-		ft_putchar(' ');
-	}
+	int_helper(s);
 	ft_putstr(str);
 	s->print += ft_strlen(str);
 	ft_strdel(&str);
