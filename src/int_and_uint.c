@@ -35,10 +35,10 @@ void	int_helper(t_struct *s)
 void	ifnum(t_struct *s, va_list args)
 {
 	char		*str;
-	int			i;
 
 	str = length_modifiers_int(s, 0, args);
-	i = ft_atoi(str);
+	if (str[0] == '0' && s->precision == -1)
+		str[0] = '\0';
 	s->number = s->precision - ft_strlen(str);
 	if (s->width && s->minus)
 	{
