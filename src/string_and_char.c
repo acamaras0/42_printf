@@ -60,11 +60,11 @@ void	ifchar(t_struct *s, va_list args)
 
 static char	*string_precision(char *str, int i)
 {
-	char	*temp;
-	int		len;
+	char		*temp;
+	size_t		len;
 
 	len = ft_strlen(str);
-	if (i && (i <= len))
+	if (i > 0 && (size_t)i <= len)
 	{
 		temp = ft_strndup(str, i);
 		str = temp;
@@ -86,17 +86,20 @@ void	ifstring(t_struct *s, va_list args)
 		str = "(null)";
 	str = string_precision(str, s->precision);
 	i = s->width - ft_strlen(str);
-	if (i && !s->zero)
+	if (i > 0 && s->minus == 0)
 	{
+		if (s->zero == 1)
+			put_zeroes(s, i);
+		else
+			put_spaces(s, i);
+		ft_putstr(str);
+	}
+	else if (i > 0 && s->minus == 1)
+	{
+		ft_putstr(str);
 		put_spaces(s, i);
-		ft_putstr(str);
-	}
-	else if (i && s->zero)
-	{
-		put_zeroes(s, i);
-		ft_putstr(str);
-	}
-	else if (str)
+		
+	}else
 		ft_putstr(str);
 	s->print += ft_strlen(str);
 }
