@@ -50,7 +50,6 @@ char	*align_to_left(t_struct *s, char *str)
 		return (joined = convert_left(str, i - 2, '0'));
 	else if (i > 0 && s->hash == 0)
 		return (joined = convert_left(str, i, '0'));
-
 	return (str);
 }
 

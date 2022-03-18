@@ -67,3 +67,29 @@ char	*to_lower(char *str)
 	}
 	return (str);
 }
+
+char	*add_zero_plus_minus(char *str, t_struct *s, char c, int conv)
+{
+	char *temp;
+	char *joined;
+
+	if (conv == 0 && str[0] != 0 && c == '0')
+	{
+			joined = ft_strjoin("0", str);
+	}
+	if (conv == 1)
+	{
+		temp = ft_strcharnew(s->number, c);
+		joined = ft_strjoin(temp, str);
+		free(temp);
+	}
+	if (conv == 2 && (s->plus && !s->negative) || s->negative)
+	{
+		if (s->plus && !s->negative)
+			joined = ft_strjoin("+", str);
+		else if (s->negative)
+			joined = ft_strjoin("-", str);
+	}
+	free(str);
+	return (joined);
+}
