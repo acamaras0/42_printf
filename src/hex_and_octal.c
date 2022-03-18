@@ -17,16 +17,14 @@ static char 	*joined(t_struct *s, char *str)
 	char	*join;
 	char 	*temp;
 
-	join = NULL;
+	temp = NULL;
 	if (s->bigx == 1)
-		join = ft_strjoin("0X", str);
+		temp = ft_strjoin("0X", str);
 	else if (s->bigx == 0)
-		join = ft_strjoin("0x", str);
-	if (!join)
-	{
-		temp = join;
-		ft_strdel(&join);
-	}
+		temp = ft_strjoin("0x", str);
+	join = ft_strdup(temp);
+	ft_strdel(&temp);
+	ft_strdel(&str);
 	return (join);
 }
 
@@ -94,17 +92,18 @@ void	ifhex2(t_struct *s, va_list args)
 
 void	ifoctal(t_struct *s, va_list args)
 {
-	char	*str;
-	int		n;
+	char			*str;
+	unsigned long	n;
 
-	str = length_modifiers_oct(s, 0, args);
+	n = 0;
+	str = length_modifiers_oct(s, n, args);
 	if (str[0] == '0' && s->precision == -1)
 		str[0] = '\0';
-	n = ft_strlen(str);
-	s->number = s->precision - n;
 	if (s->hash == 1 || s->number > 0)
 		str = ft_strjoin("0", str);
-	n = ft_strlen(str);
+	s->number = s->precision - ft_strlen(str);
+	if (s->precision > 0 && s->number > 0)
+		str = add_zero_plus_minus(str, s, '0', 1);
 	if (s->minus == 1)
 		str = align_to_right(s, str);
 	else if (s->minus == 0 )

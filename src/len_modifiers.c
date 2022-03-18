@@ -29,7 +29,7 @@ char	*length_modifiers_int(t_struct *s, intmax_t i, va_list args)
 		i *= -1;
 		s->negative = 1;
 	}
-	return (ft_itoa(i));
+	return (ft_itoa_base(i, 10));
 }
 
 char	*length_modifiers_uint(t_struct *s, unsigned long i, va_list args)

@@ -82,7 +82,7 @@ char	*add_zero_plus_minus(char *str, t_struct *s, char c, int conv)
 	{
 		temp = ft_strcharnew(s->number, c);
 		joined = ft_strjoin(temp, str);
-		free(temp);
+		ft_strdel(&temp);
 	}
 	if (conv == 3)
 	{
@@ -97,6 +97,6 @@ char	*add_zero_plus_minus(char *str, t_struct *s, char c, int conv)
 			}
 		}
 	}
-	free(str);
+	ft_strdel(&str);
 	return (joined);
 }
