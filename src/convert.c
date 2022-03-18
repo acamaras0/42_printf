@@ -35,20 +35,20 @@ char	*align_to_left(t_struct *s, char *str)
 	i = s->width - ft_strlen(str);
 	if (i > 0 && s->zero == 0 && s->negative == 0)
 		return (joined = convert_left(str, i , ' '));
-	else if (i > 0 && s->zero == 0 && s->negative == 1 && !(s->minus == 1 || s->plus == 1))
+	else if (i > 0 && s->zero == 0 && s->negative == 1 && s->plus == 0)
 		return (joined = convert_left(str, i - 2 , ' '));
-	else if (i > 0 && s->zero == 0 && s->negative == 1 && (s->minus == 1 || s->plus == 1))
+	else if (i > 0 && s->zero == 0 && s->negative == 1 && s->plus == 1)
 		return (joined = convert_left(str, i - 1, ' '));
 
 
 
-	else if (i > 0 && !(s->plus == 1 || s->minus == 1) && s->zero == 1 && s->negative == 0 && s->hash == 0)
+	else if (i > 0 && s->plus == 0 && s->negative == 0 && s->hash == 0)
 		return (joined = convert_left(str, i , '0'));
-	else if (i > 0 && (s->negative == 1 || s->plus == 1 || s->minus == 1) && s->zero == 1 && s->hash == 0)
+	else if (i > 0 && (s->negative == 1 || s->plus == 1) && s->hash == 0)
 		return (joined = convert_left(str, i - 1, '0'));
-	else if (i > 0 && s->zero == 1 && s->hash == 1)
+	else if (i > 0 && s->hash == 1)
 		return (joined = convert_left(str, i - 2, '0'));
-	else if (i > 0 && s->zero == 1 && s->hash == 0)
+	else if (i > 0 && s->hash == 0)
 		return (joined = convert_left(str, i, '0'));
 
 	return (str);
