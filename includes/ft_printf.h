@@ -47,7 +47,6 @@ typedef struct s_struct
 	int			number;
 	int			bigx;
 	int			star;
-	int			octals;
 }				t_struct;
 
 void	ifpercent(t_struct *s);	
