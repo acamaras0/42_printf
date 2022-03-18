@@ -40,15 +40,18 @@ void	ifnum(t_struct *s, va_list args)
 	if (str[0] == '0' && s->precision == -1)
 		str[0] = '\0';
 	s->number = s->precision - ft_strlen(str);
-	if (s->width && s->minus)
+	if (s->number && s->minus)
 	{
 		str = align_to_right(s, str);
+		int_helper(s);
 	}
-	else if (s->width && !s->minus)
+	else if (s->number && !s->minus)
 	{
 		str = align_to_left(s, str);
+		int_helper(s);
 	}
-	int_helper(s);
+	else
+		int_helper(s);
 	ft_putstr(str);
 	s->print += ft_strlen(str);
 	ft_strdel(&str);
@@ -62,9 +65,9 @@ void	ifunsigned(t_struct *s, va_list args)
 	if (str[0] == '0' && s->precision == -1)
 		str[0] = '\0';
 	s->number = s->precision - ft_strlen(str);
-	if (s->width && s->zero && s->minus)
+	if (s->number && s->minus)
 		str = align_to_right(s, str);
-	else if (s->width && !s->minus)
+	else if (s->number && !s->minus)
 		str = align_to_left(s, str);
 	ft_putstr(str);
 	s->print += ft_strlen(str);

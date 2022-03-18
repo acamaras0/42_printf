@@ -79,11 +79,11 @@ void	ifhex2(t_struct *s, va_list args)
 			str = swap(s, str, n);
 	else
 	{
-		if ((s->hash == 1 && str[1] != 0) && s->zero == 0)
+		if ((s->hash == 1 && str[1] != 0) && s->zero == 0 && n > 0)
 			str = joined(s, str);
-		if (s->minus == 1 && n > 0)
+		if (s->minus == 1)
 			str = align_to_right(s, str);
-		else if (s->minus == 0 && n > 0)
+		else if (s->minus == 0)
 			str = align_to_left(s, str);
 	}
 	str = to_lower(str);
@@ -97,16 +97,17 @@ void	ifoctal(t_struct *s, va_list args)
 	char	*str;
 	int		n;
 
-	s->octals = 1;
 	str = length_modifiers_oct(s, 0, args);
 	if (str[0] == '0' && s->precision == -1)
 		str[0] = '\0';
-	if (s->hash == 1)
+	n = ft_strlen(str);
+	s->number = s->precision - n;
+	if (s->hash == 1 || s->number > 0)
 		str = ft_strjoin("0", str);
 	n = ft_strlen(str);
-	if (s->minus == 1 && n > 0)
+	if (s->minus == 1)
 		str = align_to_right(s, str);
-	else if (s->minus == 0 && n > 0)
+	else if (s->minus == 0 )
 		str = align_to_left(s, str);
 	ft_putstr(str);
 	s->print += ft_strlen(str); 
