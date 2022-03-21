@@ -92,7 +92,7 @@ char	*add_zero_plus_minus(char *str, t_struct *s, char c, int conv);
 
 char	*align_to_left(t_struct *s, char *str);
 char	*align_to_right(t_struct *s, char *str);
-char	*convert_left(char *str, int i, char c);
+char	*convert_left(t_struct *s, char *str, int i, char c);
 char	*convert_right(char *str, int i, char c);
 
 int		ft_printf(const char *format, ...);
