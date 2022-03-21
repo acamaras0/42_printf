@@ -14,7 +14,6 @@
 
 char	*swap_signs(char *str, char c, int i)
 {
-	//printf("\nHERE1: %d\n", i);
 	while (str[i] && str[i] != '+' && str[i] != '-')
 		i++;
 	if(str[i] == '+' || str[i] == '-')
@@ -23,7 +22,6 @@ char	*swap_signs(char *str, char c, int i)
 		str[i] = '0';
 		str[0] = c;
 	}
-	//printf("\nHERE2: %d\n", i);
 	return (str);
 }
 
@@ -36,14 +34,10 @@ char	*convert_left(t_struct *s, char *str, int i, char c)
 	n = 0;
 	temp = ft_strcharnew(i, c);
 	joined = ft_strjoin(temp, str);
-	//printf("\nHERE3: %d %d %d %d %d\n", s->zero, s->width, s->plus, s->minus, s->negative);
-	if (s->zero && s->width && (s->plus || s->minus || s->negative))
+	if (s->zero && s->width && (s->plus || s->minus || !s->negative))
 		joined = swap_signs(joined, c, i);
-	if (!temp || !str)
-	{
-		ft_strdel(&temp);
-		ft_strdel(&str);
-	}
+	ft_strdel(&temp);
+	ft_strdel(&str);
 	return (joined);
 }
 
@@ -62,9 +56,6 @@ char	*align_to_left(t_struct *s, char *str)
 		return (joined = convert_left(s, str, i - 2 , ' '));
 	else if (i > 0 && s->zero == 0 && s->negative == 1 && s->plus == 1)
 		return (joined = convert_left(s, str, i - 1, ' '));
-
-
-
 	else if (i > 0 && s->plus == 0 && s->negative == 0 && s->hash == 0 && !s->precision)
 		return (joined = convert_left(s, str, i , '0'));
 	else if (i > 0 && (s->negative == 1 || s->plus == 1) && s->hash == 0 && !s->precision)
