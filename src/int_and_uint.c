@@ -29,9 +29,9 @@ void	ifnum(t_struct *s, va_list args)
 	}
 	if ((s->plus && !s->negative) || s->negative)
 		str = add_zero_plus_minus(str, s, '+', 3);
-	if (s->number && s->minus)
+	if (s->minus)
 		str = align_to_right(s, str);
-	else if (s->number && !s->minus)
+	else if (!s->minus)
 		str = align_to_left(s, str);
 	ft_putstr(str);
 	s->print += ft_strlen(str);
