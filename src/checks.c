@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-void	flags_check(const char *format, t_struct *s)
+static void	flags_check(const char *format, t_struct *s)
 {
 	while (ft_strchr("#0-+ ", format[s->index]))
 	{
@@ -32,7 +32,7 @@ void	flags_check(const char *format, t_struct *s)
 		s->space = 0;
 }
 
-void	length_check(t_struct *s, const char *format)
+static void	length_check(t_struct *s, const char *format)
 {
 	if (format[s->index] == 'l')
 	{
@@ -52,7 +52,7 @@ void	length_check(t_struct *s, const char *format)
 		s->index++;
 }
 
-void	width_check(const char *format, t_struct *s, va_list args)
+static void	width_check(const char *format, t_struct *s, va_list args)
 {
 	if (format[s->index] == '*')
 	{

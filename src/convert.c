@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-char	*swap_signs(char *str, char c, int i)
+static char	*swap_signs(char *str, char c, int i)
 {
 	while (str[i] && str[i] != '+' && str[i] != '-')
 		i++;
@@ -25,7 +25,7 @@ char	*swap_signs(char *str, char c, int i)
 	return (str);
 }
 
-char	*convert_left(t_struct *s, char *str, int i, char c)
+static char	*convert_left(t_struct *s, char *str, int i, char c)
 {
 	char	*temp;
 	char	*joined;
@@ -68,7 +68,7 @@ char	*align_to_left(t_struct *s, char *str)
 	return (str);
 }
 
-char	*convert_right(char *str, int i, char c)
+static char	*convert_right(char *str, int i, char c)
 {
 	char	*temp;
 	char	*joined;

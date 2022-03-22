@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-void	set_default(t_struct *s)
+static void	set_default(t_struct *s)
 {
 	s->print = 0;
 	s->length = 0;
@@ -30,7 +30,7 @@ void	set_default(t_struct *s)
 	s->index = 0;
 }
 
-void	set_default1(t_struct *s)
+/*static void	set_default1(t_struct *s)
 {
 	s->print = 0;
 	s->length = 0;
@@ -45,7 +45,7 @@ void	set_default1(t_struct *s)
 	s->number = 0;
 	s->bigx = 0;
 	s->star = 0;
-}
+}*/
 
 int	parse(const char *format, t_struct *s, va_list args, int pos)
 {
