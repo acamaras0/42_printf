@@ -98,8 +98,8 @@ void	ifstring(t_struct *s, va_list args)
 	{
 		ft_putstr(str);
 		put_spaces(s, i);
-		
-	}else
+	}
+	else
 		ft_putstr(str);
 	s->print += ft_strlen(str);
 }

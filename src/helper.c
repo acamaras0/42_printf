@@ -56,9 +56,9 @@ void	specifier_check(t_struct *s, char c, va_list args)
 
 char	*to_lower(char *str)
 {
-	int j;
+	int	j;
 
-	j= 0;
+	j = 0;
 	while (str[j])
 	{
 		if (str[j] >= 65 && str[j] <= 90)
@@ -70,14 +70,9 @@ char	*to_lower(char *str)
 
 char	*add_zero_plus_minus(char *str, t_struct *s, char c, int conv)
 {
-	char *temp;
-	char *joined;
+	char	*temp;
+	char	*joined;
 
-	if (conv == 0)
-	{
-		if (str[0] != 0 && c == '0')
-			joined = ft_strjoin("0", str);
-	}
 	if (conv == 1 || conv == 2)
 	{
 		temp = ft_strcharnew(s->number, c);

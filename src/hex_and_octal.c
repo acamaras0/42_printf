@@ -12,10 +12,10 @@
 
 #include "../includes/ft_printf.h"
 
-static char 	*joined(t_struct *s, char *str)
+static char	*joined(t_struct *s, char *str)
 {
 	char	*join;
-	char 	*temp;
+	char	*temp;
 
 	temp = NULL;
 	if (s->bigx == 1)
@@ -35,7 +35,7 @@ static char	*swap(t_struct *s, char *str, int n)
 	else if (s->minus == 0 && n > 0)
 		str = align_to_left(s, str);
 	str = joined(s, str);
-	return (str);	
+	return (str);
 }
 
 void	ifhex(t_struct *s, va_list args)
@@ -106,9 +106,9 @@ void	ifoctal(t_struct *s, va_list args)
 		str = add_zero_plus_minus(str, s, '0', 1);
 	if (s->minus == 1)
 		str = align_to_right(s, str);
-	else if (s->minus == 0 )
+	else if (s->minus == 0)
 		str = align_to_left(s, str);
 	ft_putstr(str);
-	s->print += ft_strlen(str); 
+	s->print += ft_strlen(str);
 	ft_strdel(&str);
 }
