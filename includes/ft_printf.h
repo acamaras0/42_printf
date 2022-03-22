@@ -79,10 +79,8 @@ char	*length_modifiers_uint(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_oct(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_hex(t_struct *s, unsigned long i, va_list args);
 
-void	flags_check(const char *format, t_struct *s);
-void	length_check(t_struct *s, const char *format);
 void	specifier_check(t_struct *s, char c, va_list args);
-void	width_check(const char *format, t_struct *s, va_list args);
+void	precision_check(const char *format, t_struct *s, va_list args, int n);
 void	all_checks(const char *format, t_struct *s, va_list args);
 
 void	put_zeroes(t_struct *s, int n);
@@ -92,8 +90,6 @@ char	*add_zero_plus_minus(char *str, t_struct *s, char c, int conv);
 
 char	*align_to_left(t_struct *s, char *str);
 char	*align_to_right(t_struct *s, char *str);
-char	*convert_left(t_struct *s, char *str, int i, char c);
-char	*convert_right(char *str, int i, char c);
 
 int		ft_printf(const char *format, ...);
 
