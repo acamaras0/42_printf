@@ -28,6 +28,7 @@
 # define LL 2
 # define H  3
 # define HH 4
+# define BL 5
 
 typedef struct s_struct
 {
@@ -47,6 +48,7 @@ typedef struct s_struct
 	int			number;
 	int			bigx;
 	int			star;
+	int			floatprecis;
 }				t_struct;
 
 void	ifpercent(t_struct *s);	
@@ -58,6 +60,7 @@ void	ifunsigned(t_struct *s, va_list args);
 void	ifhex(t_struct *s, va_list args);
 void	ifhex2(t_struct *s, va_list args);
 void	ifoctal(t_struct *s, va_list args);
+void	iffloat(t_struct *s, va_list args);
 
 typedef void	(*t_dispach)(t_struct *s, va_list args);
 
@@ -71,13 +74,14 @@ static const t_dispach	g_dispach[11] = {
 	ifunsigned,
 	ifhex2,
 	ifhex,
-	NULL,
+	iffloat,
 };
 
 char	*length_modifiers_int(t_struct *s, intmax_t i, va_list args);
 char	*length_modifiers_uint(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_oct(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_hex(t_struct *s, unsigned long i, va_list args);
+char	*length_modifiers_float(t_struct *s, long double i, va_list args);
 
 void	specifier_check(t_struct *s, char c, va_list args);
 void	precision_check(const char *format, t_struct *s, va_list args, int n);

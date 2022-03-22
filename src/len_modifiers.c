@@ -76,3 +76,24 @@ char	*length_modifiers_hex(t_struct *s, unsigned long i, va_list args)
 		i = (unsigned int)va_arg(args, unsigned int);
 	return (ft_itoa_base(i, 16));
 }
+
+char	*length_modifiers_float(t_struct *s, long double i, va_list args)
+{
+	if (s->length == BL)
+		i = (long double)va_arg(args, long double);
+	else 
+		i = (long double)va_arg(args, double);
+	if (s->precision == 0)
+	{
+		s->precision = 6;
+		s->floatprecis = 1;
+	}
+	else if (s->hash && s->precision == -1 && !s->floatprecis && i != 0)
+	{
+		s->precision = 0;
+		s->floatprecis = 1;
+	}
+	if (i < 0)
+		s->negative = 1;
+	return (ft_ftoa(i, s->precision,  s->floatprecis));
+}

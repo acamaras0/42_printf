@@ -52,6 +52,8 @@ void	specifier_check(t_struct *s, char c, va_list args)
 		ifhex(s, args);
 	else if (c == 'o')
 		ifoctal(s, args);
+	else if (c == 'f')
+		iffloat(s, args);
 }
 
 char	*to_lower(char *str)

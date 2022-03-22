@@ -28,6 +28,7 @@ static void	set_default(t_struct *s)
 	s->bigx = 0;
 	s->star = 0;
 	s->index = 0;
+	s->floatprecis = 0;
 }
 
 /*static void	set_default1(t_struct *s)
