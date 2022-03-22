@@ -93,5 +93,6 @@ char	*ft_itoa_base(unsigned long long n, int base);
 char	*ft_ulltoa(unsigned long long n);
 char	*ft_strcharnew(size_t size, int c);
 char	*ft_strndup(const char *src, int n);
+char	*ft_ftoa(long double fl, int i, int d);
 
 #endif
