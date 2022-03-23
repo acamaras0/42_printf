@@ -26,15 +26,27 @@ static long double	rounding(int precision, long double f)
 	return (rounding);
 }
 
+void	checko(int prec, unsigned long long decimal, long double fl, char *fp)
+{
+	int	i;
+
+	i = 1;
+	while (prec -- > 0)
+	{
+		fl *= 10;
+		decimal = fl;
+		fl -= decimal;
+		fp[i++] = decimal + '0';
+	}
+}
+
 char	*ft_ftoa(long double fl, int prec, int d)
 {
-	int						i;
 	char					*joined;
 	char					*ip;
 	char					*fp;
 	unsigned long long		decimal;
 
-	i = 1;
 	fl = fl + rounding(prec, fl);
 	if (fl < 0)
 		fl *= -1;
@@ -47,27 +59,9 @@ char	*ft_ftoa(long double fl, int prec, int d)
 		fp[0] = '.';
 	else
 		fp[0] = '\0';
-	while (prec -- > 0)
-	{
-		fl *= 10;
-		decimal = fl;
-		fl -= decimal;
-		fp[i++] = decimal + '0';
-	}
+	checko(prec, decimal, fl, fp);
 	joined = ft_strjoin(ip, fp);
 	ft_strdel(&ip);
 	ft_strdel(&fp);
 	return (joined);
 }
-
-/*#include <stdio.h>
-int main()
-{
-	char *s = NULL;
-
-	s = ft_ftoa(1.56673, 4, 1);
-	ft_putstr(s);
-	ft_putchar('\n');
-	printf("%.4f\n", 1.56673);
-	return(0);
-}*/
