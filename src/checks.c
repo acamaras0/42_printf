@@ -48,6 +48,8 @@ static void	length_check(t_struct *s, const char *format)
 		else if (format[s->index - 1] != 'h')
 			s->length = H;
 	}
+	if (format[s->index] == 'L')
+		s->length = BL;
 	while (ft_strchr(LENGTH, format[s->index]) && format[s->index])
 		s->index++;
 }
@@ -79,18 +81,24 @@ void	precision_check(const char *format, t_struct *s, va_list args, int n)
 	if (format[s->index] == '.')
 	{
 		s->precision = -1;
+		s->floatprecis = 0;
 		s->index++;
 		if (format[s->index] >= '0' && format [s->index] <= '9')
 		{
 			s->precision = ft_atoi(&format[s->index]);
 			if (s->precision == 0)
 				s->precision = -1;
+			if (s->precision > 0)
+				s->floatprecis = 1;
 		}
 		else if (format[s->index] == '*')
 		{
 			n = va_arg(args, int);
 			if (n >= 0)
+			{
 				s->precision = n;
+				s->floatprecis = 1;
+			}
 			while (format[s->index] == '*')
 				s->index++;
 		}

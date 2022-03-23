@@ -14,11 +14,23 @@
 
 void	iffloat(t_struct *s, va_list args)
 {
-	char	*str;
+	long double	i;
+	char		*str;
 
-	str = length_modifiers_float(s, 0, args);
-
-	
+	i = 0;
+	str = length_modifiers_float(s, i, args);
+	s->number = s->precision - ft_strlen(str);
+	if (((s->plus && !s->negative) || s->negative) && str[0] != '-')
+		str = add_zero_plus_minus(str, s, '+', 3);
+	if (s->space && !s->negative)
+	{
+		s->number = 1;
+		str = add_zero_plus_minus(str, s, ' ', 2);
+	}
+	if (s->minus)
+		str = align_to_right(s, str);
+	if (!s->minus)
+		str = align_to_left(s, str);
 	ft_putstr(str);
 	s->print += ft_strlen(str);
 	ft_strdel(&str);

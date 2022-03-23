@@ -81,7 +81,7 @@ char	*length_modifiers_float(t_struct *s, long double i, va_list args)
 {
 	if (s->length == BL)
 		i = (long double)va_arg(args, long double);
-	else 
+	else
 		i = (long double)va_arg(args, double);
 	if (s->precision == 0)
 	{
@@ -95,5 +95,5 @@ char	*length_modifiers_float(t_struct *s, long double i, va_list args)
 	}
 	if (i < 0)
 		s->negative = 1;
-	return (ft_ftoa(i, s->precision,  s->floatprecis));
+	return (ft_ftoa(i, s->precision, s->floatprecis));
 }
