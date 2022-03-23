@@ -21,11 +21,8 @@ static long double		round(long double fl, int prec)
 	if (fl < 0)
 		round *= -1;
 	decimal = 0;
-	while (decimal < prec)
-	{
-		round /= 10;
-		decimal++;
-	}
+	while (decimal++ < prec)
+		round /= 10.0;
 	return (round);
 }
 
@@ -44,7 +41,7 @@ char	*ft_ftoa(long double fl, int prec, int d)
 	decimal = fl;
 	ip = ft_itoa(decimal);
 	if (prec)
-		fl -= decimal;
+		fl = fl - decimal;
 	fp = ft_strnew(prec + 2);
 	if (d)
 		fp[0] = '.';
