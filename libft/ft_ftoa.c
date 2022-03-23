@@ -12,18 +12,18 @@
 
 #include "libft.h"
 
-static long double		round(long double fl, int prec)
+static long double	rounding(int precision, long double f)
 {
-	long double		round;
-	int				decimal;
+	long double	rounding;
+	int			d;
 
-	round = 0.5;
-	if (fl < 0)
-		round *= -1;
-	decimal = 0;
-	while (decimal++ < prec)
-		round /= 10.0;
-	return (round);
+	rounding = 0.5;
+	if (f < 0)
+		rounding *= -1;
+	d = 0;
+	while (d++ < precision)
+		rounding /= 10.0;
+	return (rounding);
 }
 
 char	*ft_ftoa(long double fl, int prec, int d)
@@ -35,7 +35,7 @@ char	*ft_ftoa(long double fl, int prec, int d)
 	unsigned long long		decimal;
 
 	i = 1;
-	fl = fl + round(prec, fl);
+	fl = fl + rounding(prec, fl);
 	if (fl < 0)
 		fl *= -1;
 	decimal = fl;
@@ -60,11 +60,14 @@ char	*ft_ftoa(long double fl, int prec, int d)
 	return (joined);
 }
 
-/*int main()
+/*#include <stdio.h>
+int main()
 {
 	char *s = NULL;
 
-	s = ft_ftoa(1.56673, 10, 4);
+	s = ft_ftoa(1.56673, 4, 1);
 	ft_putstr(s);
+	ft_putchar('\n');
+	printf("%.4f\n", 1.56673);
 	return(0);
-} */
+}*/
