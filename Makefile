@@ -24,7 +24,7 @@ LIB_OBJ = ./libft/*.o
 
 SRCS1 = ./src/ft_printf.c ./src/checks.c ./src/convert.c ./src/helper.c \
 		./src/hex_and_octal.c ./src/int_and_uint.c ./src/len_modifiers.c ./src/pointer.c \
-		./src/pointer.c ./src/string_and_char.c ./src/iffloat.c
+		./src/pointer.c ./src/string_and_char.c ./src/iffloat.c ./src/ft_ftoa.c
 
 OBJS = $(subst .c,.o,$(subst src/,,$(SRCS1)))
 
