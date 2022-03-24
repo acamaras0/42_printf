@@ -46,7 +46,6 @@ typedef struct s_struct
 	int			precision;
 	int			negative;
 	int			number;
-	int			bigx;
 	int			star;
 	int			floatprecis;
 }				t_struct;
@@ -57,25 +56,9 @@ void	ifstring(t_struct *s, va_list args);
 void	ifnum(t_struct *s, va_list args);
 void	ifpointer(t_struct *s, va_list args);
 void	ifunsigned(t_struct *s, va_list args);
-void	ifhex(t_struct *s, va_list args);
-void	ifhex2(t_struct *s, va_list args);
+void	ifhex(t_struct *s, va_list args, char c);
 void	ifoctal(t_struct *s, va_list args);
 void	iffloat(t_struct *s, va_list args);
-
-typedef void	(*t_dispach)(t_struct *s, va_list args);
-
-static const t_dispach	g_dispach[11] = {
-	ifchar,
-	ifstring,
-	ifpointer,
-	ifnum,
-	ifnum,
-	ifoctal,
-	ifunsigned,
-	ifhex2,
-	ifhex,
-	iffloat,
-};
 
 char	*length_modifiers_int(t_struct *s, intmax_t i, va_list args);
 char	*length_modifiers_uint(t_struct *s, unsigned long i, va_list args);
@@ -83,9 +66,11 @@ char	*length_modifiers_oct(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_hex(t_struct *s, unsigned long i, va_list args);
 char	*length_modifiers_float(t_struct *s, long double i, va_list args);
 
+void	flags_check(const char *format, t_struct *s);
+void	length_check(t_struct *s, const char *format);
 void	specifier_check(t_struct *s, char c, va_list args);
 void	precision_check(const char *format, t_struct *s, va_list args, int n);
-void	all_checks(const char *format, t_struct *s, va_list args);
+void	width_check(const char *format, t_struct *s, va_list args);
 
 void	put_zeroes(t_struct *s, int n);
 void	put_spaces(t_struct *s, int n);
@@ -96,5 +81,6 @@ char	*align_to_left(t_struct *s, char *str);
 char	*align_to_right(t_struct *s, char *str);
 
 int		ft_printf(const char *format, ...);
+char	*ft_ftoa(t_struct *s, long double fl, int prec, int d);
 
 #endif
