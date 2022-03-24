@@ -80,7 +80,7 @@ char	*add_zero_plus_minus(char *str, t_struct *s, char c, int conv);
 char	*align_to_left(t_struct *s, char *str);
 char	*align_to_right(t_struct *s, char *str);
 
-int		ft_printf(const char *format, ...);
 char	*ft_ftoa(t_struct *s, long double fl, int prec, int d);
+int		ft_printf(const char *format, ...);
 
 #endif
