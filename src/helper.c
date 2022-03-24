@@ -14,9 +14,12 @@
 
 void	put_zeroes(t_struct *s, int n)
 {
+	char	z;
+
+	z = '0';
 	while (n > 0)
 	{
-		ft_putchar('0');
+		write(1, &z, 1);
 		n--;
 		s->print++;
 	}
@@ -24,9 +27,12 @@ void	put_zeroes(t_struct *s, int n)
 
 void	put_spaces(t_struct *s, int n)
 {
+	char	sp;
+
+	sp = ' ';
 	while (n > 0)
 	{
-		ft_putchar(' ');
+		write(1, &sp, 1);
 		n--;
 		s->print++;
 	}
@@ -46,10 +52,8 @@ void	specifier_check(t_struct *s, char c, va_list args)
 		ifpointer(s, args);
 	else if (c == 'u')
 		ifunsigned(s, args);
-	else if (c == 'x')
-		ifhex2(s, args);
-	else if (c == 'X')
-		ifhex(s, args);
+	else if (c == 'x' || c == 'X')
+		ifhex(s, args, c);
 	else if (c == 'o')
 		ifoctal(s, args);
 	else if (c == 'f')

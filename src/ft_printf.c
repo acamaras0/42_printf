@@ -25,41 +25,23 @@ static void	set_default(t_struct *s)
 	s->precision = 0;
 	s->negative = 0;
 	s->number = 0;
-	s->bigx = 0;
 	s->star = 0;
 	s->index = 0;
 	s->floatprecis = 0;
 }
-
-/*static void	set_default1(t_struct *s)
-{
-	s->print = 0;
-	s->length = 0;
-	s->minus = 0;
-	s->plus = 0;
-	s->width = 0;
-	s->zero = 0;
-	s->space = 0;
-	s->hash = 0;
-	s->precision = 0;
-	s->negative = 0;
-	s->number = 0;
-	s->bigx = 0;
-	s->star = 0;
-}*/
 
 int	parse(const char *format, t_struct *s, va_list args, int pos)
 {
 	s->index = pos;
 	if (ft_strchr(FLAGS, format[pos]))
 	{
-		all_checks(format, s, args);
+		flags_check(format, s);
+		width_check(format, s, args);
+		precision_check(format, s, args, 0);
+		length_check(s, format);
 	}
 	else
-	{
 		specifier_check(s, format[pos], args);
-		//set_default1(s);
-	}
 	pos = s->index;
 	if (format[pos] == '\0')
 		return (pos);

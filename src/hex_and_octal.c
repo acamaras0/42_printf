@@ -12,16 +12,13 @@
 
 #include "../includes/ft_printf.h"
 
-static char	*joined(t_struct *s, char *str)
+static char	*joined(char *str)
 {
 	char	*join;
 	char	*temp;
 
 	temp = NULL;
-	if (s->bigx == 1)
-		temp = ft_strjoin("0X", str);
-	else if (s->bigx == 0)
-		temp = ft_strjoin("0x", str);
+	temp = ft_strjoin("0X", str);
 	join = ft_strdup(temp);
 	ft_strdel(&temp);
 	ft_strdel(&str);
@@ -34,37 +31,11 @@ static char	*swap(t_struct *s, char *str, int n)
 		str = align_to_right(s, str);
 	else if (s->minus == 0 && n > 0)
 		str = align_to_left(s, str);
-	str = joined(s, str);
+	str = joined(str);
 	return (str);
 }
 
-void	ifhex(t_struct *s, va_list args)
-{
-	char	*str;
-	int		n;
-
-	s->bigx = 1;
-	str = length_modifiers_hex(s, 0, args);
-	if (str[0] == '0' && s->precision == -1)
-		str[0] = '\0';
-	n = ft_strlen(str);
-	if (s->hash == 1 && s->zero == 1 && str[0] != '\0' && str[0] != '0')
-		str = swap(s, str, n);
-	else
-	{
-		if ((s->hash == 1 && str[1] != 0) && s->zero == 0)
-			str = joined(s, str);
-		if (s->minus == 1 && n > 0)
-			str = align_to_right(s, str);
-		else if (s->minus == 0 && n > 0)
-			str = align_to_left(s, str);
-	}
-	ft_putstr(str);
-	s->print += ft_strlen(str);
-	ft_strdel(&str);
-}
-
-void	ifhex2(t_struct *s, va_list args)
+void	ifhex(t_struct *s, va_list args, char c)
 {
 	char	*str;
 	int		n;
@@ -78,14 +49,15 @@ void	ifhex2(t_struct *s, va_list args)
 	else
 	{
 		if ((s->hash == 1 && str[1] != 0) && s->zero == 0 && n > 0)
-			str = joined(s, str);
+			str = joined(str);
 		if (s->minus == 1)
 			str = align_to_right(s, str);
 		else if (s->minus == 0)
 			str = align_to_left(s, str);
 	}
-	str = to_lower(str);
-	ft_putstr(str);
+	if (c == 'x')
+		str = to_lower(str);
+	write(1, str, ft_strlen(str));
 	s->print += ft_strlen(str);
 	ft_strdel(&str);
 }
@@ -108,7 +80,7 @@ void	ifoctal(t_struct *s, va_list args)
 		str = align_to_right(s, str);
 	else if (s->minus == 0)
 		str = align_to_left(s, str);
-	ft_putstr(str);
+	write(1, str, ft_strlen(str));
 	s->print += ft_strlen(str);
 	ft_strdel(&str);
 }

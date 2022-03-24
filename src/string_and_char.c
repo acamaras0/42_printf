@@ -15,8 +15,10 @@
 void	ifpercent(t_struct *s)
 {
 	int		n;
+	char	p;
 
 	n = s->width - 1;
+	p = '%';
 	if (s->minus == 0 && s->width)
 	{
 		if (s->zero == 1)
@@ -26,11 +28,11 @@ void	ifpercent(t_struct *s)
 	}
 	if (s->minus == 1 && s->width)
 	{
-		ft_putchar('%');
+		write(1, &p, 1);
 		put_spaces(s, n);
 	}
 	else
-		ft_putchar('%');
+		write(1, &p, 1);
 	s->print++;
 }
 
@@ -50,11 +52,11 @@ void	ifchar(t_struct *s, va_list args)
 	}
 	if (s->minus == 1 && s->width)
 	{
-		ft_putchar(c);
+		write(1, &c, 1);
 		put_spaces(s, n);
 	}
 	else
-		ft_putchar(c);
+		write(1, &c, 1);
 	s->print++;
 }
 
@@ -92,14 +94,14 @@ void	ifstring(t_struct *s, va_list args)
 			put_zeroes(s, i);
 		else
 			put_spaces(s, i);
-		ft_putstr(str);
+		write(1, str, ft_strlen(str));
 	}
 	else if (i > 0 && s->minus == 1)
 	{
-		ft_putstr(str);
+		write(1, str, ft_strlen(str));
 		put_spaces(s, i);
 	}
 	else
-		ft_putstr(str);
+		write(1, str, ft_strlen(str));
 	s->print += ft_strlen(str);
 }

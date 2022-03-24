@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-static void	flags_check(const char *format, t_struct *s)
+void	flags_check(const char *format, t_struct *s)
 {
 	while (ft_strchr("#0-+ ", format[s->index]))
 	{
@@ -32,7 +32,7 @@ static void	flags_check(const char *format, t_struct *s)
 		s->space = 0;
 }
 
-static void	length_check(t_struct *s, const char *format)
+void	length_check(t_struct *s, const char *format)
 {
 	if (format[s->index] == 'l')
 	{
@@ -54,7 +54,7 @@ static void	length_check(t_struct *s, const char *format)
 		s->index++;
 }
 
-static void	width_check(const char *format, t_struct *s, va_list args)
+void	width_check(const char *format, t_struct *s, va_list args)
 {
 	if (format[s->index] == '*')
 	{
@@ -76,6 +76,29 @@ static void	width_check(const char *format, t_struct *s, va_list args)
 		s->index++;
 }
 
+static void	precision_helper(const char *f, t_struct *s, va_list args, int n)
+{
+	if (f[s->index] >= '0' && f[s->index] <= '9')
+	{
+		s->precision = ft_atoi(&f[s->index]);
+		if (s->precision == 0)
+			s->precision = -1;
+		if (s->precision > 0)
+			s->floatprecis = 1;
+	}
+	else if (f[s->index] == '*')
+	{
+		n = va_arg(args, int);
+		if (n >= 0)
+		{
+			s->precision = n;
+			s->floatprecis = 1;
+		}
+		while (f[s->index] == '*')
+			s->index++;
+	}
+}
+
 void	precision_check(const char *format, t_struct *s, va_list args, int n)
 {
 	if (format[s->index] == '.')
@@ -83,34 +106,8 @@ void	precision_check(const char *format, t_struct *s, va_list args, int n)
 		s->precision = -1;
 		s->floatprecis = 0;
 		s->index++;
-		if (format[s->index] >= '0' && format [s->index] <= '9')
-		{
-			s->precision = ft_atoi(&format[s->index]);
-			if (s->precision == 0)
-				s->precision = -1;
-			if (s->precision > 0)
-				s->floatprecis = 1;
-		}
-		else if (format[s->index] == '*')
-		{
-			n = va_arg(args, int);
-			if (n >= 0)
-			{
-				s->precision = n;
-				s->floatprecis = 1;
-			}
-			while (format[s->index] == '*')
-				s->index++;
-		}
+		precision_helper(format, s, args, n);
 	}
 	while (format[s->index] >= '0' && format[s->index] <= '9')
 		s->index++;
-}
-
-void	all_checks(const char *format, t_struct *s, va_list args)
-{
-	flags_check(format, s);
-	width_check(format, s, args);
-	precision_check(format, s, args, 0);
-	length_check(s, format);
 }
