@@ -12,12 +12,13 @@
 
 #include "../includes/ft_printf.h"
 
-static char	*joined(char *str)
+static char	*joined(t_struct *s, char *str)
 {
 	char	*join;
 	char	*temp;
 
 	temp = NULL;
+	s->number = s->precision - ft_strlen(str);
 	temp = ft_strjoin("0X", str);
 	join = ft_strdup(temp);
 	ft_strdel(&temp);
@@ -31,8 +32,16 @@ static char	*swap(t_struct *s, char *str, int n)
 		str = align_to_right(s, str);
 	else if (s->minus == 0 && n > 0)
 		str = align_to_left(s, str);
-	str = joined(str);
+	str = joined(s, str);
 	return (str);
+}
+
+static void	more_hex_checks(t_struct *s, char *str, int n)
+{
+	if (!s->hash)
+		s->number = s->precision - n;
+	if (s->hash && str[1] == '\0')
+		s->number = s->precision - n;
 }
 
 void	ifhex(t_struct *s, va_list args, char c)
@@ -45,16 +54,16 @@ void	ifhex(t_struct *s, va_list args, char c)
 	if (str[0] == '0' && s->precision == -1)
 		str[0] = '\0';
 	if (s->hash == 1 && s->zero == 1 && str[0] != '\0' && str[0] != '0')
-			str = swap(s, str, n);
-	else
-	{
-		if ((s->hash == 1 && str[1] != 0) && s->zero == 0 && n > 0)
-			str = joined(str);
-		if (s->minus == 1)
-			str = align_to_right(s, str);
-		else if (s->minus == 0)
-			str = align_to_left(s, str);
-	}
+		str = swap(s, str, n);
+	if ((s->hash == 1 && str[1] != 0) && s->zero == 0 && n > 0)
+		str = joined(s, str);
+	more_hex_checks(s, str, n);
+	if (s->precision > 0 && s->number > 0)
+		str = add_zero_plus_minus(str, s, '0', 1);
+	if (s->minus == 1)
+		str = align_to_right(s, str);
+	else if (s->minus == 0)
+		str = align_to_left(s, str);
 	if (c == 'x')
 		str = to_lower(str);
 	write(1, str, ft_strlen(str));
@@ -69,9 +78,9 @@ void	ifoctal(t_struct *s, va_list args)
 
 	n = 0;
 	str = length_modifiers_oct(s, n, args);
-	if (str[0] == '0' && s->precision == -1)
+	if ((str[0] == '0' && s->precision == -1) || str[0] == '\0')
 		str[0] = '\0';
-	if (s->hash == 1 || s->number > 0)
+	if (s->hash == 1 && str[0] != '0')
 		str = ft_strjoin("0", str);
 	s->number = s->precision - ft_strlen(str);
 	if (s->precision > 0 && s->number > 0)
