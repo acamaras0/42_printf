@@ -49,7 +49,7 @@ char	*align_to_left(t_struct *s, char *str)
 	joined = NULL;
 	i = s->width - ft_strlen(str);
 	if (i > 0 && s->zero == 1 && s->precision > 0
-		&& !(s->hash && s->space && s->plus && s->minus))
+		&& !(s->hash && s->plus))
 		return (joined = convert_left(s, str, i, ' '));
 	if (i > 0 && s->zero == 0 && s->negative == 0)
 		return (joined = convert_left(s, str, i, ' '));
