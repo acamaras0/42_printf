@@ -64,6 +64,8 @@ void	ifhex(t_struct *s, va_list args, char c)
 		str = align_to_right(s, str);
 	else if (s->minus == 0)
 		str = align_to_left(s, str);
+	if (s->hash && s->precision > 0)
+		str = joined(s, str);
 	if (c == 'x')
 		str = to_lower(str);
 	write(1, str, ft_strlen(str));
