@@ -30,11 +30,12 @@ static char	*convert_left(t_struct *s, char *str, int i, char c)
 	char	*temp;
 	char	*joined;
 	int		n;
-
+ 
+	(void)s;
 	n = 0;
 	temp = ft_strcharnew(i, c);
 	joined = ft_strjoin(temp, str);
-	if (s->zero && s->width && (s->plus || s->minus || !s->negative))
+	if (s->zero && !s->precision && s->width && (s->plus || s->minus || !s->negative))
 		joined = swap_signs(joined, c, i);
 	ft_strdel(&temp);
 	ft_strdel(&str);
