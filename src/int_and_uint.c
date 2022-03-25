@@ -25,13 +25,15 @@ void	ifnum(t_struct *s, va_list args)
 	if (s->space && !s->negative)
 	{
 		s->number = 1;
+		if (s->zero)
+			str = add_zero_plus_minus(str, s, '0', 2);
 		str = add_zero_plus_minus(str, s, ' ', 2);
 	}
 	if ((s->plus && !s->negative) || s->negative)
 		str = add_zero_plus_minus(str, s, '+', 3);
 	if (s->minus)
 		str = align_to_right(s, str);
-	else if (!s->minus)
+	if (!s->minus)
 		str = align_to_left(s, str);
 	write(1, str, ft_strlen(str));
 	s->print += ft_strlen(str);
