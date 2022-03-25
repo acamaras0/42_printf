@@ -14,11 +14,9 @@
 
 void	iffloat(t_struct *s, va_list args)
 {
-	long double	i;
 	char		*str;
 
-	i = 0;
-	str = length_modifiers_float(s, i, args);
+	str = length_modifiers_float(s, 0, args);
 	s->number = s->precision - ft_strlen(str);
 	if (((s->plus && !s->negative) || s->negative) && str[0] != '-')
 		str = add_zero_plus_minus(str, s, '+', 3);
