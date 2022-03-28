@@ -28,11 +28,13 @@ static char	*joined(t_struct *s, char *str)
 
 static char	*swap(t_struct *s, char *str, int n)
 {
+	s->number = s->precision - ft_strlen(str);
 	if (s->minus == 1 && n > 0)
 		str = align_to_right(s, str);
 	else if (s->minus == 0 && n > 0)
 		str = align_to_left(s, str);
-	str = joined(s, str);
+	if (!s->precision)
+		str = joined(s, str);
 	return (str);
 }
 
@@ -42,22 +44,23 @@ static void	more_hex_checks(t_struct *s, char *str, int n)
 		s->number = s->precision - n;
 	if (s->hash && str[1] == '\0')
 		s->number = s->precision - n;
+	if (s->hash && s->precision)
+		s->number = s->precision - ft_strlen(str);
 }
 
 void	ifhex(t_struct *s, va_list args, char c)
 {
 	char	*str;
-	int		n;
 
 	str = length_modifiers_hex(s, 0, args);
-	n = ft_strlen(str);
 	if (str[0] == '0' && s->precision == -1)
 		str[0] = '\0';
 	if (s->hash == 1 && s->zero == 1 && str[0] != '\0' && str[0] != '0')
-		str = swap(s, str, n);
-	if ((s->hash == 1 && str[1] != 0) && s->zero == 0 && n > 0)
+		str = swap(s, str, ft_strlen(str));
+	if (s->hash && str[1] != 0 && !s->zero && ft_strlen(str) > 0
+		&& !(s->hash && s->precision))
 		str = joined(s, str);
-	more_hex_checks(s, str, n);
+	more_hex_checks(s, str, ft_strlen(str));
 	if (s->precision > 0 && s->number > 0)
 		str = add_zero_plus_minus(str, s, '0', 1);
 	if (s->minus == 1)
