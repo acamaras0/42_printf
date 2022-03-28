@@ -44,8 +44,6 @@ static void	more_hex_checks(t_struct *s, char *str, int n)
 		s->number = s->precision - n;
 	if (s->hash && str[1] == '\0')
 		s->number = s->precision - n;
-	if (s->hash && s->precision)
-		s->number = s->precision - ft_strlen(str);
 }
 
 void	ifhex(t_struct *s, va_list args, char c)
