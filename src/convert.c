@@ -25,7 +25,7 @@ static char	*swap_signs(char *str, char c, int i)
 	return (str);
 }
 
-static char	*convert_left(t_struct *s, char *str, int i, char c)
+char	*convert_left(t_struct *s, char *str, int i, char c)
 {
 	char	*temp;
 	char	*joined;

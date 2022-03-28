@@ -16,13 +16,20 @@ static char	*joined(t_struct *s, char *str)
 {
 	char	*join;
 	char	*temp;
+	int		i;
 
+	join = NULL;
 	temp = NULL;
+	i = s->width - ft_strlen(str);
 	s->number = s->precision - ft_strlen(str);
 	temp = ft_strjoin("0X", str);
-	join = ft_strdup(temp);
-	ft_strdel(&temp);
+	if (s->hash && s->zero && s->precision)
+		join = convert_left(s, temp, i - 2, ' ');
+	else
+		join = ft_strdup(temp);
 	ft_strdel(&str);
+	if (temp != NULL)
+		ft_strdel(&temp);
 	return (join);
 }
 
@@ -44,6 +51,8 @@ static void	more_hex_checks(t_struct *s, char *str, int n)
 		s->number = s->precision - n;
 	if (s->hash && str[1] == '\0')
 		s->number = s->precision - n;
+	if (s->precision > 0)
+		s->number = s->precision - ft_strlen(str);
 }
 
 void	ifhex(t_struct *s, va_list args, char c)
