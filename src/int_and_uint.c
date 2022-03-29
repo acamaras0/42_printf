@@ -25,7 +25,7 @@ void	ifnum(t_struct *s, va_list args)
 	if (s->space && !s->negative)
 	{
 		s->number = 1;
-		if (s->zero)
+		if (s->zero && s->width)
 			str = add_zero_plus_minus(str, s, '0', 2);
 		str = add_zero_plus_minus(str, s, ' ', 2);
 	}

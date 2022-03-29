@@ -23,6 +23,10 @@ static char	*joined(t_struct *s, char *str)
 	i = s->width - ft_strlen(str);
 	s->number = s->precision - ft_strlen(str);
 	temp = ft_strjoin("0X", str);
+	if (i > 0 && s->hash && s->zero && s->precision)
+		return (join = convert_left(s, temp, i - 2, ' '));
+	if (i > 0 && s->hash && !s->zero && s->precision)
+		return (join = convert_left(s, temp, i - 2, ' '));
 	join = ft_strdup(temp);
 	ft_strdel(&str);
 	ft_strdel(&temp);
