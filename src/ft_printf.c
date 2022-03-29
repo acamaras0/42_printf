@@ -28,6 +28,7 @@ static void	set_default(t_struct *s)
 	s->star = 0;
 	s->index = 0;
 	s->floatprecis = 0;
+	s->octal = 0;
 }
 
 int	parse(const char *format, t_struct *s, va_list args, int pos)

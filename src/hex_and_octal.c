@@ -23,13 +23,9 @@ static char	*joined(t_struct *s, char *str)
 	i = s->width - ft_strlen(str);
 	s->number = s->precision - ft_strlen(str);
 	temp = ft_strjoin("0X", str);
-	if (s->hash && s->zero && s->precision)
-		join = convert_left(s, temp, i - 2, ' ');
-	else
-		join = ft_strdup(temp);
+	join = ft_strdup(temp);
 	ft_strdel(&str);
-	if (temp != NULL)
-		ft_strdel(&temp);
+	ft_strdel(&temp);
 	return (join);
 }
 
@@ -89,6 +85,7 @@ void	ifoctal(t_struct *s, va_list args)
 	unsigned long	n;
 
 	n = 0;
+	s->octal = 1;
 	str = length_modifiers_oct(s, n, args);
 	if ((str[0] == '0' && s->precision == -1) || str[0] == '\0')
 		str[0] = '\0';
