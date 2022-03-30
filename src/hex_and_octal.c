@@ -23,12 +23,10 @@ static char	*joined(t_struct *s, char *str)
 	i = s->width - ft_strlen(str);
 	s->number = s->precision - ft_strlen(str);
 	temp = ft_strjoin("0X", str);
-	if (i > 0 && s->hash && s->zero && s->precision)
-		return (join = convert_left(s, temp, i - 2, ' '));
-	if (i > 0 && s->hash && !s->zero && s->precision)
+	ft_strdel(&str);
+	if (i > 0 && s->hash && s->precision)
 		return (join = convert_left(s, temp, i - 2, ' '));
 	join = ft_strdup(temp);
-	ft_strdel(&str);
 	ft_strdel(&temp);
 	return (join);
 }
@@ -47,12 +45,14 @@ static char	*swap(t_struct *s, char *str, int n)
 
 static void	more_hex_checks(t_struct *s, char *str, int n)
 {
-	if (!s->hash)
+	if (!s->hash && !s->octal)
 		s->number = s->precision - n;
-	if (s->hash && str[1] == '\0')
+	if (s->hash && str[1] == '\0' && !s->octal)
 		s->number = s->precision - n;
-	if (s->precision > 0)
+	if (s->precision > 0 && !s->octal)
 		s->number = s->precision - ft_strlen(str);
+	if (((str[0] == '0' && s->precision == -1) || str[0] == '\0') && s->octal)
+		str[0] = '\0';
 }
 
 void	ifhex(t_struct *s, va_list args, char c)
@@ -86,15 +86,19 @@ void	ifhex(t_struct *s, va_list args, char c)
 void	ifoctal(t_struct *s, va_list args)
 {
 	char			*str;
+	char			*temp;
 	unsigned long	n;
 
 	n = 0;
 	s->octal = 1;
 	str = length_modifiers_oct(s, n, args);
-	if ((str[0] == '0' && s->precision == -1) || str[0] == '\0')
-		str[0] = '\0';
+	more_hex_checks(s, str, n);
+	temp = ft_strdup(str);
 	if (s->hash == 1 && str[0] != '0')
-		str = ft_strjoin("0", str);
+	{
+		ft_strdel(&str);
+		str = ft_strjoin("0", temp);
+	}
 	s->number = s->precision - ft_strlen(str);
 	if (s->precision > 0 && s->number > 0)
 		str = add_zero_plus_minus(str, s, '0', 1);
@@ -104,5 +108,6 @@ void	ifoctal(t_struct *s, va_list args)
 		str = align_to_left(s, str);
 	write(1, str, ft_strlen(str));
 	s->print += ft_strlen(str);
+	ft_strdel(&temp);
 	ft_strdel(&str);
 }
