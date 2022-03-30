@@ -60,6 +60,8 @@ char	*align_to_left(t_struct *s, char *str)
 	if (i > 0 && s->zero == 1 && s->precision > 0
 		&& !(s->hash || s->plus || s->space))
 		return (joined = convert_left(s, str, i, ' '));
+	if (i > 0 && s->octal && s->hash && s->precision)
+		return (joined = convert_left(s, str, i, ' '));
 	if (i > 0 && s->zero == 0 && s->negative == 0 && !(s->precision && s->hash))
 		return (joined = convert_left(s, str, i, ' '));
 	if (i > 0 && s->zero == 0 && s->negative == 1 && s->plus == 0)
@@ -100,6 +102,8 @@ char	*align_to_right(t_struct *s, char *str)
 
 	joined = NULL;
 	i = s->width - ft_strlen(str);
+	if (i > 0 && s->hash && s->octal && s->zero)
+		return (joined = convert_right(str, i, ' '));
 	if (i > 0 && s->negative == 1)
 		return (joined = convert_right(str, i - 1, ' '));
 	else if (i > 0 && s->zero == 1 && s->hash == 1)
