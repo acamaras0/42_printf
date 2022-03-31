@@ -80,7 +80,7 @@ char	*add_zero_plus_minus(char *str, t_struct *s, char c, int conv);
 char	*swap_signs(t_struct *s, char *str, char c, int i);
 void	set_default(t_struct *s);
 
-char	*align_to_left(t_struct *s, char *str);
+char	*align_to_left(t_struct *s, char *str, int i);
 char	*align_to_right(t_struct *s, char *str);
 char	*convert_left(t_struct *s, char *str, int i, char c);
 
