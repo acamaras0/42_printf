@@ -34,7 +34,7 @@ void	ifnum(t_struct *s, va_list args)
 	if (s->minus)
 		str = align_to_right(s, str);
 	if (!s->minus)
-		str = align_to_left(s, str);
+		str = align_to_left(s, str, 0);
 	write(1, str, ft_strlen(str));
 	s->print += ft_strlen(str);
 	ft_strdel(&str);
@@ -53,7 +53,7 @@ void	ifunsigned(t_struct *s, va_list args)
 	if (s->number && s->minus)
 		str = align_to_right(s, str);
 	else if (s->number && !s->minus)
-		str = align_to_left(s, str);
+		str = align_to_left(s, str, 0);
 	write(1, str, ft_strlen(str));
 	s->print += ft_strlen(str);
 	ft_strdel(&str);
