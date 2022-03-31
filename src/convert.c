@@ -12,27 +12,6 @@
 
 #include "../includes/ft_printf.h"
 
-static char	*swap_signs(t_struct *s, char *str, char c, int i)
-{
-	while (str[i] && str[i] != '+' && str[i] != '-' && (s->plus || s->minus))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		c = str[i];
-		str[i] = '0';
-		str[0] = c;
-	}
-	while (str[i] && str[i] != ' ')
-		i++;
-	if (str[i] == ' ')
-	{
-		c = str[i];
-		str[i] = '0';
-		str[0] = c;
-	}
-	return (str);
-}
-
 char	*convert_left(t_struct *s, char *str, int i, char c)
 {
 	char	*temp;
@@ -50,6 +29,12 @@ char	*convert_left(t_struct *s, char *str, int i, char c)
 	return (joined);
 }
 
+/*static char	*align_to_left_space(t_struct *s, char *str, char *joined, int i)
+{
+	
+	return (str);
+}*/
+
 char	*align_to_left(t_struct *s, char *str)
 {
 	int		i;
@@ -57,7 +42,7 @@ char	*align_to_left(t_struct *s, char *str)
 
 	joined = NULL;
 	i = s->width - ft_strlen(str);
-	if (i > 0 && s->zero == 1 && s->precision > 0
+	if (i > 0 && s->zero && s->precision > 0
 		&& !(s->hash || s->plus || s->space))
 		return (joined = convert_left(s, str, i, ' '));
 	if (i > 0 && s->octal && s->hash && s->precision)
