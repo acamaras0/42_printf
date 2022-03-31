@@ -37,7 +37,7 @@ static char	*swap(t_struct *s, char *str, int n)
 	if (s->minus == 1 && n > 0)
 		str = align_to_right(s, str);
 	else if (s->minus == 0 && n > 0)
-		str = align_to_left(s, str);
+		str = align_to_left(s, str, 0);
 	if (!s->precision)
 		str = joined(s, str);
 	return (str);
@@ -73,7 +73,7 @@ void	ifhex(t_struct *s, va_list args, char c)
 	if (s->minus == 1)
 		str = align_to_right(s, str);
 	else if (s->minus == 0)
-		str = align_to_left(s, str);
+		str = align_to_left(s, str, 0);
 	if (s->hash && s->precision > 0)
 		str = joined(s, str);
 	if (c == 'x')
@@ -105,7 +105,7 @@ void	ifoctal(t_struct *s, va_list args)
 	if (s->minus == 1)
 		str = align_to_right(s, str);
 	else if (s->minus == 0)
-		str = align_to_left(s, str);
+		str = align_to_left(s, str, 0);
 	write(1, str, ft_strlen(str));
 	s->print += ft_strlen(str);
 	ft_strdel(&temp);
