@@ -35,12 +35,10 @@ char	*convert_left(t_struct *s, char *str, int i, char c)
 	return (str);
 }*/
 
-char	*align_to_left(t_struct *s, char *str)
+char	*align_to_left(t_struct *s, char *str, int i)
 {
-	int		i;
 	char	*joined;
 
-	joined = NULL;
 	i = s->width - ft_strlen(str);
 	if (i > 0 && s->zero && s->precision > 0
 		&& !(s->hash || s->plus || s->space))
