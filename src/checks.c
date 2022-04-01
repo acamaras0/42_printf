@@ -12,6 +12,12 @@
 
 #include "../includes/ft_printf.h"
 
+/*
+** checks for the flags and it modifies the struct values of each
+** flag found, so we can create the proper condifions for alignments
+** later in the alignment functions.
+*/
+
 void	flags_check(const char *format, t_struct *s)
 {
 	while (ft_strchr("#0-+ ", format[s->index]))
@@ -31,6 +37,12 @@ void	flags_check(const char *format, t_struct *s)
 	if (s->plus == 1)
 		s->space = 0;
 }
+
+/*
+** checks for length formats and updates the struct variable with the
+** length modifier found, in order to be able to do the correct 
+** typecastings in the length modifier functions.
+*/
 
 void	length_check(t_struct *s, const char *format)
 {
@@ -54,6 +66,13 @@ void	length_check(t_struct *s, const char *format)
 		s->index++;
 }
 
+/*
+** checks for width/star. if we have the "-" flag, if star found, 
+** it formats the width to an int.
+** otherwise it converts the width to aan int with atoi and we move
+** forward.
+*/
+
 void	width_check(const char *format, t_struct *s, va_list args)
 {
 	if (format[s->index] == '*')
@@ -75,6 +94,13 @@ void	width_check(const char *format, t_struct *s, va_list args)
 	while (format[s->index] >= '0' && format[s->index] <= '9')
 		s->index++;
 }
+
+/*
+** when it finds the "." in the precision_check function, it calls
+** for this function, that converts it to int, modifies all the
+** precision variables from the struct. if the star is found after,
+** we take it as int then we move forward. 
+*/
 
 static void	precision_helper(const char *f, t_struct *s, va_list args, int n)
 {
@@ -98,6 +124,11 @@ static void	precision_helper(const char *f, t_struct *s, va_list args, int n)
 			s->index++;
 	}
 }
+
+/*
+** if we find the "." we modify the precision variables from the struct
+** and we all for the precision_helper function. we move the index forward.
+*/
 
 void	precision_check(const char *format, t_struct *s, va_list args, int n)
 {
