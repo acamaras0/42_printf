@@ -12,6 +12,13 @@
 
 #include "../includes/ft_printf.h"
 
+/*
+** checks for flags, if flags found, we check what flag it is, if there is 
+** width, precision and/or length modifiers.
+** else calls for specifier check where, considering what specifier we get,
+** we call for a function which handles the rest.
+*/
+
 int	parse(const char *format, t_struct *s, va_list args, int pos)
 {
 	s->index = pos;
@@ -29,6 +36,11 @@ int	parse(const char *format, t_struct *s, va_list args, int pos)
 		return (pos);
 	return (pos - 1);
 }
+
+/*
+** checks for the format that comes after the "%" and calls for the parser
+** in order to continue with the checks for flags, width, precision and length.
+*/
 
 int	formato(const char *format, t_struct *s, va_list args, int pos)
 {
@@ -70,7 +82,6 @@ int	ft_printf(const char *format, ...)
 	if (!s)
 		return (0);
 	set_default(s);
-	s->form = (char *)format;
 	va_start(args, format);
 	len = ft_strlen(format);
 	if (len == 0)
