@@ -16,7 +16,7 @@ static void	pointer_checks(t_struct *s, char *joined, int n)
 {
 	if (n > 0 && s->zero == 0 && s->minus == 0)
 		put_spaces(s, n);
-	if (n > 0 && s->zero == 1 && s->minus == 0)
+	if (n > 0 && s->zero == 1 && s->minus == 1)
 		put_zeroes(s, n);
 	if (n > 0 && s->minus == 1)
 	{
