@@ -12,6 +12,10 @@
 
 #include "../includes/ft_printf.h"
 
+/*
+** prints zeroes
+*/
+
 void	put_zeroes(t_struct *s, int n)
 {
 	char	z;
@@ -25,6 +29,10 @@ void	put_zeroes(t_struct *s, int n)
 	}
 }
 
+/*
+** prints spaces
+*/
+
 void	put_spaces(t_struct *s, int n)
 {
 	char	sp;
@@ -37,6 +45,11 @@ void	put_spaces(t_struct *s, int n)
 		s->print++;
 	}
 }
+
+/*
+** checks for the specifier and calls accordingly for the function
+** that deals with that precise specifier.
+*/
 
 void	specifier_check(t_struct *s, char c, va_list args)
 {
@@ -60,6 +73,13 @@ void	specifier_check(t_struct *s, char c, va_list args)
 		iffloat(s, args);
 }
 
+/*
+** turns upper case letters to lower case
+** it is used for pointers and hexadecimal handler
+** because my ft_itoa_base is only printing upper case
+** letters.
+*/
+
 char	*to_lower(char *str)
 {
 	int	j;
@@ -73,6 +93,12 @@ char	*to_lower(char *str)
 	}
 	return (str);
 }
+
+/*
+** adds zeroes, plus or minus depending on what convertion we call
+** this function helps for when we have to print a negative number
+** or when we have the "+" flag or precision.
+*/
 
 char	*add_zero_plus_minus(char *str, t_struct *s, char c, int conv)
 {
