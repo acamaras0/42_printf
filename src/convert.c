@@ -12,6 +12,13 @@
 
 #include "../includes/ft_printf.h"
 
+/*
+** adds spaces or zeroes on the left side of the thing we 
+** want our function to print.
+** calls for the function swipe_signs, in case the if contidion
+** is met.
+*/
+
 char	*convert_left(t_struct *s, char *str, int i, char c)
 {
 	char	*temp;
@@ -29,11 +36,13 @@ char	*convert_left(t_struct *s, char *str, int i, char c)
 	return (joined);
 }
 
-/*static char	*align_to_left_space(t_struct *s, char *str, char *joined, int i)
-{
-	
-	return (str);
-}*/
+/*
+** depending on the number we get from the substraction of the
+** width and the length of the string, we have different if conditions
+** with different flag combinations which call for the convert_left
+** function, that will add accordingly spaces or zeroes on the 
+** left side of the string.
+*/
 
 char	*align_to_left(t_struct *s, char *str, int i)
 {
@@ -64,6 +73,11 @@ char	*align_to_left(t_struct *s, char *str, int i)
 	return (str);
 }
 
+/*
+** adds spaces or zeroes on the right side of the thing we 
+** want our function to print.
+*/
+
 static char	*convert_right(char *str, int i, char c)
 {
 	char	*temp;
@@ -77,6 +91,14 @@ static char	*convert_right(char *str, int i, char c)
 	ft_strdel(&str);
 	return (joined);
 }
+
+/*
+** depending on the number we get from the substraction of the
+** width and the length of the string, we have different if conditions
+** with different flag combinations which call for the convert_right
+** function, that will add accordingly spaces or zeroes on the 
+** right side of the string.
+*/
 
 char	*align_to_right(t_struct *s, char *str)
 {
