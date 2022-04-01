@@ -12,6 +12,12 @@
 
 #include "../includes/ft_printf.h"
 
+/*
+** in case we have "-" / "+" / " " after the aligntment happens
+** we use this function to swipe either of those at the beginning
+** of the string, before we print it out. 
+*/
+
 char	*swap_signs(t_struct *s, char *str, char c, int i)
 {
 	while (str[i] && str[i] != '+' && str[i] != '-' && (s->plus || s->minus))
@@ -32,6 +38,10 @@ char	*swap_signs(t_struct *s, char *str, char c, int i)
 	}
 	return (str);
 }
+
+/*
+** sets the struct variables to 0, whenever a new convertion happens.
+*/
 
 void	set_default(t_struct *s)
 {
