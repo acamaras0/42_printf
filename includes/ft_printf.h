@@ -33,7 +33,6 @@
 typedef struct s_struct
 {
 	va_list		arg;
-	char		*form;
 	int			print;
 	int			length;
 	int			index;
