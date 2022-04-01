@@ -40,6 +40,17 @@ void	checko(int prec, unsigned long long decimal, long double fl, char *fp)
 	}
 }
 
+/*
+** if the precision is bigger than 0, we call the rounding function,
+** otherwise we check if the double is a negative and we set the decimal
+** variable to the int part of the double. 
+** ip takes the decimal value in a string and if we have precision,
+** we set the double to be only the point after the dot.
+** the fp string is created with the length of precision + 2
+** (precision + int part + dot). if d(dot), we add the "."
+** we go to checko to add the decimal to the fp if precision > 0.
+*/
+
 char	*ft_ftoa(t_struct *s, long double fl, int prec, int d)
 {
 	char					*joined;
