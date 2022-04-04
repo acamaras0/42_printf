@@ -1,7 +1,5 @@
 # 42_printf
 
-**** NOT READY ****
-
 
 
 To compile, run make. This will compile libftprintf.a. 
