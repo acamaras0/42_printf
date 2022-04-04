@@ -3,49 +3,6 @@
 #define RED "\x18[31m"
 #define NORMAL "\x1B[0m"
 
-/*int    main(void)
-{
-    int i;
-    int q = 3;
-    int r = 2;
-    int s = 1;
-    long double j;
-    //char    str[]= "Thank you Jonas!";
-    size_t a;
-    long int b;
-    char    c;
-    unsigned int x = 255;
-
-    c = 65;
-    i = 10;
-    a = 15;
-    b = 123456890123456789;
-    j = 3.142165131313113;
-    ft_printf("Hello Jona!\n");
-    ft_printf("Number: %d | %d |%d |%d\n", i, q, r ,s);
-    //ft_printf("My string:%5s\nsize_t: %d\nfloat:%f\n", str, a, j);
-    ft_printf("Pointer:%p\n", &a);
-    //printf("My string:%5s\n", str);
-    ft_printf("%%\n");
-
-    ft_printf("My char: %c\nMy %%i: %i\nMyOcto: %o\nMy uint: %u\n", c, i, i, x);
-    ft_printf("XDecimal: %x\n Big X: %X\n", i, i);
-
-
-    ft_printf("%c | %d |%d| %c\n", c,i, i, c);
-
-    ft_printf("%hd|| %hhd | %ld || %lld", 42, i, 42, b);
-    //ft_printf("Jonas: %Lf\n", j);
-    //printf("Origin: %Lf\n", j);
-
-    //ft_printf("%.55d\n", 16091985);
-    ft_printf("%*d\n", 55, 55);
-
-    ft_printf("%sHello%s\n", RED, NORMAL);
-
-    return (0);
-}
-*/
 
 int main()
 {
@@ -115,8 +72,6 @@ int main()
    ft_printf ("Preceding with zeros: %010d \n", 1977);
    printf ("\nSome different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
    ft_printf ("Some different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
-   //printf ("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
-   //printf ("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
 
    printf("\n\n Test for hash x: %#x", 42);
    ft_printf("\n Test for hash x: %#x\n", 42);
@@ -171,11 +126,7 @@ int main()
     ft_printf("FT: %-#6o\n", 2500);
     printf("PF: %-#6o\n\n", 2500);
 
- printf("\n\nNEED TO FIX\n\n");
+    ft_printf("FT: @moulitest:%05d", -42);
+    printf("PF: @moulitest:%05d", -42);
 
-    ft_printf("FT: %-10.5o\n", 2500);
-    printf("PF: %-10.5o\n\n", 2500);
-
-    ft_printf("FT: %5d\n", -42);
-    printf("PF: %5d\n\n", -42);
 }
