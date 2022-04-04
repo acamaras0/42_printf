@@ -1,7 +1,7 @@
 # 42_printf
 
 To compile, run **make**. This will compile libftprintf.a. 
-To use, include **ft_printf.h** (located inside includes directory) and use just like printf.
+To use (no idea why would you wanna do that tho), include **ft_printf.h** (located inside includes directory) and use just like printf.
 
 Then compile with a program:
 
